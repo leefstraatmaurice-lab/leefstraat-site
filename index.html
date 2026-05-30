@@ -49,16 +49,26 @@
   #hero {
     min-height: 100vh; display: flex; flex-direction: column;
     justify-content: flex-end; padding: 0 48px 72px;
-    position: relative; background: var(--cream); overflow: hidden;
+    position: relative; overflow: hidden;
+    background: var(--green-deep);
+  }
+  .hero-photo {
+    position: absolute; inset: 0;
+    background-image: url('fotos/hero.jpg');
+    background-size: cover; background-position: center;
+    background-repeat: no-repeat;
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(139,184,122,0.25) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(212,131,42,0.12) 0%, transparent 60%);
+    background: linear-gradient(
+      to top,
+      rgba(26,26,24,0.85) 0%,
+      rgba(26,26,24,0.4) 40%,
+      rgba(26,26,24,0.15) 100%
+    );
   }
   .hero-tag {
-    display: inline-block; background: var(--amber-light); color: var(--amber);
+    display: inline-block; background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(8px);
     font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
     text-transform: uppercase; padding: 6px 14px; border-radius: 999px; margin-bottom: 28px;
   }
@@ -70,7 +80,7 @@
   }
   .hero-title em { font-style: italic; color: var(--amber); }
   .hero-sub {
-    margin-top: 28px; font-size: 17px; color: var(--text-mid);
+    margin-top: 28px; font-size: 17px; color: rgba(255,255,255,0.85);
     max-width: 480px; line-height: 1.6; font-weight: 300;
   }
   .hero-cta {
@@ -84,7 +94,7 @@
   .hero-scroll {
     position: absolute; right: 48px; bottom: 72px;
     display: flex; flex-direction: column; align-items: center; gap: 8px;
-    color: var(--text-light); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
   }
   .scroll-line {
     width: 1px; height: 60px;
@@ -92,22 +102,6 @@
     animation: scrollpulse 2s ease-in-out infinite;
   }
   @keyframes scrollpulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
-  .hero-circles {
-    position: absolute; right: 120px; top: 50%; transform: translateY(-50%);
-    width: 320px; height: 320px; pointer-events: none;
-  }
-  .circle-outer {
-    position: absolute; inset: 0;
-    border: 1.5px solid rgba(74,124,47,0.2); border-radius: 50%;
-    animation: rotatecircle 20s linear infinite;
-  }
-  .circle-mid { position: absolute; inset: 40px; background: var(--green-pale); border-radius: 50%; }
-  .circle-inner { position: absolute; inset: 80px; background: var(--green-light); border-radius: 50%; opacity: 0.5; }
-  .circle-year {
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--green-deep);
-  }
-  @keyframes rotatecircle { to { transform: rotate(360deg); } }
 
   /* SECTIONS */
   section { padding: 100px 48px; }
@@ -280,13 +274,8 @@
 </div>
 
 <section id="hero">
+  <div class="hero-photo"></div>
   <div class="hero-bg"></div>
-  <div class="hero-circles" aria-hidden="true">
-    <div class="circle-outer"></div>
-    <div class="circle-mid"></div>
-    <div class="circle-inner"></div>
-    <div class="circle-year">2026</div>
-  </div>
   <div style="position:relative">
     <div class="hero-tag">Zomer 2026 · Gentbrugge</div>
     <h1 class="hero-title">Leefstraat<br><em>Maurice</em><br>Verdoncklaan</h1>
@@ -303,6 +292,21 @@
   <div class="section-tag">Agenda</div>
   <h2 class="section-title">Wat staat er op het programma?</h2>
   <div class="events-grid" id="events-grid"></div>
+</section>
+
+<section id="fotos">
+  <div class="section-tag">Herinneringen</div>
+  <h2 class="section-title">Foto's van de straat</h2>
+  <div class="photos-grid">
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+  </div>
+  <div class="photos-cta">
+    <a href="fotos.html" class="btn-outline">Bekijk alle foto's →</a>
+  </div>
 </section>
 
 <section id="contact">
