@@ -207,8 +207,9 @@
 
   .hamburger {
     display: none; background: none; border: none;
-    cursor: pointer; padding: 4px; flex-direction: column;
-    gap: 5px; justify-content: center;
+    cursor: pointer; padding: 8px; flex-direction: column;
+    gap: 5px; justify-content: center; align-items: center;
+    flex-shrink: 0; z-index: 101;
   }
   .hamburger span {
     display: block; width: 24px; height: 2px;
@@ -220,7 +221,7 @@
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
   .mobile-menu {
-    display: none; position: fixed; top: 65px; left: 0; right: 0;
+    display: none; position: fixed; top: 64px; left: 0; right: 0;
     background: rgba(250,247,242,0.98); backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(45,80,22,0.1);
     flex-direction: column; padding: 16px 24px 24px; gap: 4px;
@@ -239,6 +240,7 @@
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .hamburger { display: flex; }
+    nav { padding: 14px 20px; }
   }
 
   @media (max-width: 768px) {
@@ -265,7 +267,17 @@
     <li><a href="regels.html">Regels</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu openen" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#hero" onclick="closeMenu()">Home</a>
+  <a href="#kalender" onclick="closeMenu()">Activiteiten</a>
+  <a href="fotos.html" onclick="closeMenu()">Foto's</a>
+  <a href="regels.html" onclick="closeMenu()">Regels</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
 
 <section id="hero">
   <div class="hero-bg"></div>
