@@ -75,10 +75,10 @@
   .hero-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(52px, 8vw, 110px); font-weight: 900;
-    line-height: 0.95; letter-spacing: -0.03em; color: var(--warm-white);
+    line-height: 0.95; letter-spacing: -0.03em; color: var(--green-deep);
     max-width: 900px; position: relative;
   }
-  .hero-title em { font-style: italic; color: var(--warm-white); }
+  .hero-title em { font-style: italic; color: var(--amber); }
   .hero-sub {
     margin-top: 28px; font-size: 17px; color: rgba(255,255,255,0.85);
     max-width: 480px; line-height: 1.6; font-weight: 300;
@@ -294,6 +294,21 @@
   <div class="events-grid" id="events-grid"></div>
 </section>
 
+<section id="fotos">
+  <div class="section-tag">Herinneringen</div>
+  <h2 class="section-title">Foto's van de straat</h2>
+  <div class="photos-grid">
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+  </div>
+  <div class="photos-cta">
+    <a href="fotos.html" class="btn-outline">Bekijk alle foto's →</a>
+  </div>
+</section>
+
 <section id="contact">
   <div class="section-tag">Neem contact op</div>
   <h2 class="section-title">Vragen of ideeën?</h2>
@@ -302,7 +317,8 @@
       <p>Wil je meehelpen, een activiteit voorstellen of gewoon meer info? Stuur ons een berichtje — we horen graag van onze buren.</p>
       <p style="margin-top:20px;font-size:14px;opacity:0.5;">Leefstraat Maurice Verdoncklaan · Gentbrugge · 2026</p>
     </div>
-    <form class="contact-form" id="contact-form">
+    <form class="contact-form" id="contact-form" name="contact" netlify netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact">
       <input type="text" name="naam" placeholder="Jouw naam" required>
       <input type="email" name="email" placeholder="E-mailadres" required>
       <textarea name="bericht" placeholder="Jouw bericht…" rows="4" required></textarea>
@@ -361,7 +377,7 @@ function renderEvents() {
   }).join('');
 }
 
-// ── FORMSPREE CONTACT FORM ──
+// ── NETLIFY FORMS ──
 const form = document.getElementById('contact-form');
 if (form) {
   form.addEventListener('submit', async function(e) {
@@ -370,10 +386,10 @@ if (form) {
     btn.textContent = 'Versturen…';
     btn.disabled = true;
     try {
-      const res = await fetch('https://formspree.io/f/JOUW_FORM_ID', {
+      const res = await fetch('/', {
         method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
       });
       if (res.ok) {
         form.reset();
