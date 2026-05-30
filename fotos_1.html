@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foto's – Leefstraat Maurice Verdoncklaan 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FAF7F2; --warm-white: #FFFFFF; --green-deep: #2D5016;
+    --green-mid: #4A7C2F; --green-light: #8CB87A; --green-pale: #E8F0E2;
+    --amber: #D4832A; --amber-light: #F5DDB4; --sand: #EDE8DC;
+    --text-dark: #1A1A18; --text-mid: #4A4A40; --text-light: #8A8A7A;
+    --radius: 12px; --fb: #1877F2;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px; background: rgba(250,247,242,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(45,80,22,0.1);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--green-deep); text-decoration: none; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--green-deep); }
+
+  .page-header { padding: 160px 48px 80px; background: var(--sand); position: relative; overflow: hidden; }
+  .header-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 80% at 90% 50%, rgba(139,184,122,0.2) 0%, transparent 70%); pointer-events: none; }
+  .page-tag { display: inline-block; background: var(--amber-light); color: var(--amber); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; margin-bottom: 20px; }
+  .page-title { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 68px); font-weight: 900; line-height: 1; letter-spacing: -0.03em; color: var(--green-deep); position: relative; }
+  .page-title em { font-style: italic; color: var(--amber); }
+  .page-intro { margin-top: 20px; max-width: 560px; font-size: 16px; color: var(--text-mid); line-height: 1.7; font-weight: 300; position: relative; }
+  .header-btn {
+    display: inline-flex; align-items: center; gap: 10px; margin-top: 28px;
+    background: var(--fb); color: white; padding: 14px 28px; border-radius: 999px;
+    text-decoration: none; font-size: 15px; font-weight: 500; position: relative;
+    transition: opacity 0.2s;
+  }
+  .header-btn:hover { opacity: 0.88; }
+  .header-btn svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
+
+  main { padding: 64px 48px 100px; max-width: 860px; margin: 0 auto; }
+
+  .info-card {
+    background: var(--warm-white); border-radius: var(--radius);
+    padding: 36px; border: 1px solid rgba(0,0,0,0.06); margin-bottom: 24px;
+  }
+  .info-card-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 10px; }
+  .info-card-text { font-size: 15px; color: var(--text-mid); line-height: 1.7; }
+  .fb-link-big {
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    background: var(--fb); border-radius: var(--radius); padding: 28px 32px;
+    text-decoration: none; transition: opacity 0.2s; margin-bottom: 24px;
+  }
+  .fb-link-big:hover { opacity: 0.92; }
+  .fb-link-big-left { display: flex; align-items: center; gap: 16px; }
+  .fb-link-big svg { width: 36px; height: 36px; fill: white; flex-shrink: 0; }
+  .fb-link-big-title { color: white; font-size: 17px; font-weight: 500; }
+  .fb-link-big-sub { color: rgba(255,255,255,0.7); font-size: 13px; margin-top: 3px; }
+  .fb-link-big-arrow { color: white; font-size: 22px; opacity: 0.7; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .step { background: var(--green-pale); border-radius: var(--radius); padding: 24px; text-align: center; }
+  .step-icon { font-size: 28px; margin-bottom: 10px; }
+  .step-title { font-weight: 500; color: var(--green-deep); font-size: 14px; margin-bottom: 4px; }
+  .step-text { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+
+  footer { background: var(--green-deep); }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 32px 48px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: white; }
+  .footer-social { display: flex; gap: 12px; }
+  .social-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: background 0.2s; text-decoration: none; }
+  .social-icon:hover { background: rgba(255,255,255,0.22); }
+  .social-icon svg { width: 18px; height: 18px; fill: white; }
+  .footer-copy { text-align: center; padding: 20px 48px; color: rgba(255,255,255,0.3); font-size: 12px; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .page-header { padding: 120px 20px 60px; }
+    main { padding: 40px 20px 80px; }
+    .steps { grid-template-columns: 1fr; }
+    .footer-inner { padding: 24px 20px 16px; }
+    .footer-copy { padding: 16px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Leefstraat<br>Maurice Verdoncklaan</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#kalender">Activiteiten</a></li>
+    <li><a href="fotos.html" class="active">Foto's</a></li>
+    <li><a href="regels.html">Regels</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="header-bg"></div>
+  <div class="page-tag">Herinneringen</div>
+  <h1 class="page-title">Foto's van<br>de <em>zomer</em></h1>
+  <p class="page-intro">Alle buurtmomenten bewaren we op Facebook. Klik hieronder om onze fotoalbums te bekijken.</p>
+  <a href="https://www.facebook.com/groups/1399586126957590" target="_blank" rel="noopener" class="header-btn">
+    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    Bekijk de Facebook-groep
+  </a>
+</div>
+
+<main>
+
+  <!-- BESTAAND ALBUM -->
+  <a href="https://www.facebook.com/media/set/?set=oa.1089925041954156&type=3" target="_blank" rel="noopener" class="fb-link-big">
+    <div class="fb-link-big-left">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      <div>
+        <div class="fb-link-big-title">📸 Afscheidsdrink</div>
+        <div class="fb-link-big-sub">13 juli 2022 · Bekijk het fotoalbum op Facebook</div>
+      </div>
+    </div>
+    <div class="fb-link-big-arrow">→</div>
+  </a>
+
+  <div class="info-card" style="margin-bottom:24px;">
+    <div class="info-card-title">Meer albums komen eraan</div>
+    <div class="info-card-text">Na elke activiteit voegen we een link toe naar het fotoalbum op Facebook. Lid zijn van de groep? Dan zie je alle foto's rechtstreeks.</div>
+  </div>
+
+  <!-- HOE WERKT HET -->
+  <div class="steps">
+    <div class="step">
+      <div class="step-icon">📸</div>
+      <div class="step-title">Foto nemen</div>
+      <div class="step-text">Maak een foto tijdens een activiteit met je smartphone.</div>
+    </div>
+    <div class="step">
+      <div class="step-icon">📤</div>
+      <div class="step-title">Posten in de groep</div>
+      <div class="step-text">Upload je foto's in onze Facebook-groep — iedereen ziet ze meteen.</div>
+    </div>
+    <div class="step">
+      <div class="step-icon">❤️</div>
+      <div class="step-title">Samen genieten</div>
+      <div class="step-text">Like en reageer op de mooiste buurtmomenten.</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Leefstraat Maurice Verdoncklaan</div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/groups/1399586126957590" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="https://wa.me/" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="footer-copy">&copy; 2026 Leefstraat Maurice Verdoncklaan · Gentbrugge · Met ❤️ door de buurt</div>
+</footer>
+
+</body>
+</html>
