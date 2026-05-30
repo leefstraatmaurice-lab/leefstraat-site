@@ -165,21 +165,12 @@
 
 <main>
 
-  <!-- BESTAAND ALBUM -->
-  <a href="https://www.facebook.com/media/set/?set=oa.1089925041954156&type=3" target="_blank" rel="noopener" class="fb-link-big">
-    <div class="fb-link-big-left">
-      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-      <div>
-        <div class="fb-link-big-title">📸 Afscheidsdrink</div>
-        <div class="fb-link-big-sub">13 juli 2022 · Bekijk het fotoalbum op Facebook</div>
-      </div>
-    </div>
-    <div class="fb-link-big-arrow">→</div>
-  </a>
+  <!-- VASTE ALBUMS -->
+  <div id="albums-grid" style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;"></div>
 
-  <div class="info-card" style="margin-bottom:24px;">
-    <div class="info-card-title">Meer albums komen eraan</div>
-    <div class="info-card-text">Na elke activiteit voegen we een link toe naar het fotoalbum op Facebook. Lid zijn van de groep? Dan zie je alle foto's rechtstreeks.</div>
+  <div class="info-card" style="margin-bottom:24px;" id="geen-albums" style="display:none;">
+    <div class="info-card-title">Albums komen eraan</div>
+    <div class="info-card-text">Na elke activiteit verschijnt hier een link naar het fotoalbum op Facebook. Lid zijn van de groep? Dan zie je alle foto's rechtstreeks.</div>
   </div>
 
   <!-- HOE WERKT HET -->
@@ -218,5 +209,63 @@
   <div class="footer-copy">&copy; 2026 Leefstraat Maurice Verdoncklaan · Gentbrugge · Met ❤️ door de buurt</div>
 </footer>
 
+<script>
+const MONTHS = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+const DEFAULT = [
+  { date: '2026-06-05', name: 'Opening met hot dogs', note: '', fb: '' },
+  { date: '2026-07-11', name: 'Spelletjesavond afterwork', note: '', fb: '' },
+  { date: '2026-08-16', name: 'Koffie & taart', note: '', fb: '' },
+  { date: '2026-08-23', name: 'BBQ', note: '', fb: '' }
+];
+
+// Vast album dat altijd getoond wordt
+const VASTE_ALBUMS = [
+  { name: 'Afscheidsdrink', date: '13 jul 2022', fb: 'https://www.facebook.com/media/set/?set=oa.1089925041954156&type=3' }
+];
+
+function fmtDate(d) {
+  const p = d.split('-');
+  return `${parseInt(p[2])} ${MONTHS[parseInt(p[1])-1]} ${p[0]}`;
+}
+
+function renderAlbums() {
+  const evts = JSON.parse(localStorage.getItem('lf-events') || JSON.stringify(DEFAULT))
+    .filter(e => e.fb && e.fb.trim() !== '')
+    .sort((a,b) => b.date.localeCompare(a.date));
+
+  const grid = document.getElementById('albums-grid');
+  const geenAlbums = document.getElementById('geen-albums');
+  const fbIcon = `<svg viewBox="0 0 24 24" style="width:32px;height:32px;fill:white;flex-shrink:0"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`;
+
+  // Toon vaste albums eerst
+  let html = VASTE_ALBUMS.map(a => `
+    <a href="${a.fb}" target="_blank" rel="noopener" class="fb-link-big">
+      <div class="fb-link-big-left">${fbIcon}
+        <div>
+          <div class="fb-link-big-title">📸 ${a.name}</div>
+          <div class="fb-link-big-sub">${a.date} · Bekijk het fotoalbum op Facebook</div>
+        </div>
+      </div>
+      <div class="fb-link-big-arrow">→</div>
+    </a>`).join('');
+
+  // Voeg activiteiten-albums toe
+  html += evts.map(e => `
+    <a href="${e.fb}" target="_blank" rel="noopener" class="fb-link-big">
+      <div class="fb-link-big-left">${fbIcon}
+        <div>
+          <div class="fb-link-big-title">📸 ${e.name}</div>
+          <div class="fb-link-big-sub">${fmtDate(e.date)} · Bekijk het fotoalbum op Facebook</div>
+        </div>
+      </div>
+      <div class="fb-link-big-arrow">→</div>
+    </a>`).join('');
+
+  grid.innerHTML = html;
+  geenAlbums.style.display = evts.length === 0 ? 'block' : 'none';
+}
+
+renderAlbums();
+</script>
 </body>
 </html>

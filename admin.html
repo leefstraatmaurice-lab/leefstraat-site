@@ -161,6 +161,7 @@
           <input type="date" id="new-date" class="form-input">
           <input type="text" id="new-name" class="form-input" placeholder="Naam van de activiteit">
           <textarea id="new-note" class="form-input" rows="2" placeholder="Notitie (optioneel)"></textarea>
+          <input type="url" id="new-fb" class="form-input" placeholder="Facebook albumlink (optioneel)" style="grid-column:span 2">
         </div>
         <button class="btn-green" onclick="addEvent()">+ Toevoegen</button>
 
@@ -273,6 +274,7 @@ function renderEvents() {
         <div class="event-row-info">
           <div class="event-row-name">${e.name}</div>
           ${e.note ? `<div class="event-row-note">${e.note}</div>` : ''}
+          ${e.fb ? `<div class="event-row-note" style="color:#1877F2">📷 Facebook album gekoppeld</div>` : '<div class="event-row-note" style="color:var(--amber)">📷 Nog geen album</div>'}
         </div>
         <div class="event-row-actions">
           <button class="btn-edit" onclick="toggleEdit(${i})">✏️ Bewerken</button>
@@ -284,6 +286,7 @@ function renderEvents() {
           <input type="date" class="form-input" id="edit-date-${i}" value="${e.date}">
           <input type="text" class="form-input" id="edit-name-${i}" value="${e.name}">
           <textarea class="form-input" id="edit-note-${i}" rows="2">${e.note}</textarea>
+          <input type="url" class="form-input" id="edit-fb-${i}" value="${e.fb || ''}" placeholder="Facebook albumlink (optioneel)" style="grid-column:span 2">
         </div>
         <div class="edit-actions">
           <button class="btn-save-edit" onclick="saveEdit(${i})">Opslaan</button>
@@ -303,6 +306,7 @@ function saveEdit(i) {
   evts[i].date = document.getElementById(`edit-date-${i}`).value;
   evts[i].name = document.getElementById(`edit-name-${i}`).value.trim();
   evts[i].note = document.getElementById(`edit-note-${i}`).value.trim();
+  evts[i].fb = document.getElementById(`edit-fb-${i}`).value.trim();
   save(evts);
   renderEvents();
 }
@@ -311,13 +315,15 @@ function addEvent() {
   const date = document.getElementById('new-date').value;
   const name = document.getElementById('new-name').value.trim();
   const note = document.getElementById('new-note').value.trim();
+  const fb = document.getElementById('new-fb').value.trim();
   if (!date || !name) { showToast('⚠️ Datum en naam zijn verplicht'); return; }
   const evts = load();
-  evts.push({ date, name, note });
+  evts.push({ date, name, note, fb });
   save(evts);
   document.getElementById('new-date').value = '';
   document.getElementById('new-name').value = '';
   document.getElementById('new-note').value = '';
+  document.getElementById('new-fb').value = '';
   renderEvents();
 }
 
