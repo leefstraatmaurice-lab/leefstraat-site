@@ -340,8 +340,15 @@ function renderEvents() {
 
 function submitForm(e) {
   e.preventDefault();
-  e.target.querySelectorAll('input,textarea').forEach(el => el.value = '');
+  const naam = e.target.querySelector('input[type="text"]').value;
+  const email = e.target.querySelector('input[type="email"]').value;
+  const bericht = e.target.querySelector('textarea').value;
+  
+  const mailto = `mailto:leefstraatmaurice@gmail.com?subject=Bericht via Leefstraat MV&body=Van: ${naam}%0AEmail: ${email}%0A%0A${bericht}`;
+  window.location.href = mailto;
+  
   document.getElementById('form-thanks').style.display = 'block';
+}
 }
 
 renderEvents();
