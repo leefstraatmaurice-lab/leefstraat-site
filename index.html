@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leefstraat Maurice Verdoncklaan 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFFFF;
+    --green-deep: #2D5016;
+    --green-mid: #4A7C2F;
+    --green-light: #8CB87A;
+    --green-pale: #E8F0E2;
+    --amber: #D4832A;
+    --amber-light: #F5DDB4;
+    --sand: #EDE8DC;
+    --text-dark: #1A1A18;
+    --text-mid: #4A4A40;
+    --text-light: #8A8A7A;
+    --radius: 12px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(250,247,242,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(45,80,22,0.1);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--green-deep);
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-mid);
+    font-size: 14px; font-weight: 500; letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green-deep); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 48px 72px;
+    position: relative;
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(139,184,122,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(212,131,42,0.12) 0%, transparent 60%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--amber-light);
+    color: var(--amber);
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 6px 14px;
+    border-radius: 999px; margin-bottom: 28px;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 8vw, 110px);
+    font-weight: 900; line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--green-deep);
+    max-width: 900px;
+    position: relative;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--amber);
+  }
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 17px; color: var(--text-mid);
+    max-width: 480px; line-height: 1.6; font-weight: 300;
+  }
+  .hero-scroll {
+    position: absolute; right: 48px; bottom: 72px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--text-light); font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--green-light), transparent);
+    animation: scrollpulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollpulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+  .hero-circles {
+    position: absolute; right: 120px; top: 50%;
+    transform: translateY(-50%);
+    width: 320px; height: 320px;
+    pointer-events: none;
+  }
+  .circle-outer {
+    position: absolute; inset: 0;
+    border: 1.5px solid rgba(74,124,47,0.2);
+    border-radius: 50%;
+    animation: rotatecircle 20s linear infinite;
+  }
+  .circle-mid {
+    position: absolute; inset: 40px;
+    background: var(--green-pale);
+    border-radius: 50%;
+  }
+  .circle-inner {
+    position: absolute; inset: 80px;
+    background: var(--green-light);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+  .circle-year {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 36px; font-weight: 700;
+    color: var(--green-deep);
+  }
+  @keyframes rotatecircle { to { transform: rotate(360deg); } }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 100px 48px; }
+  .section-tag {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--green-mid);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--green-deep);
+    margin-bottom: 48px;
+  }
+
+  /* ── KALENDER ── */
+  #kalender { background: var(--sand); }
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .event-card {
+    background: var(--warm-white);
+    border-radius: var(--radius);
+    padding: 28px;
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .event-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green-mid), var(--amber));
+  }
+  .event-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(45,80,22,0.1); }
+  .event-date {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px; font-weight: 900;
+    color: var(--green-pale);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .event-month {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--green-mid);
+    margin-bottom: 16px;
+  }
+  .event-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--text-dark); margin-bottom: 8px;
+  }
+  .event-note {
+    font-size: 13px; color: var(--text-light); line-height: 1.5;
+  }
+
+  /* ── FOTOS ── */
+  #fotos { background: var(--cream); }
+  .photos-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 240px 240px;
+    gap: 12px;
+  }
+  .photo-slot {
+    background: var(--green-pale);
+    border-radius: var(--radius);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: var(--green-mid); gap: 8px;
+    font-size: 13px; font-weight: 500;
+    border: 2px dashed rgba(74,124,47,0.3);
+    transition: background 0.2s;
+    overflow: hidden; position: relative;
+  }
+  .photo-slot img {
+    width: 100%; height: 100%; object-fit: cover;
+    position: absolute; inset: 0; border-radius: var(--radius);
+  }
+  .photo-slot:first-child { grid-row: span 2; }
+  .photo-icon { font-size: 28px; opacity: 0.5; }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--green-deep);
+    color: white;
+  }
+  #contact .section-title { color: white; }
+  #contact .section-tag { color: var(--green-light); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    align-items: start;
+  }
+  .contact-text { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.7); }
+  .contact-form { display: flex; flex-direction: column; gap: 14px; }
+  .contact-form input, .contact-form textarea {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px; padding: 14px 16px;
+    color: white; font-family: 'DM Sans', sans-serif; font-size: 15px;
+    outline: none; transition: border 0.2s;
+    resize: none;
+  }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.35); }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--green-light); }
+  .btn-submit {
+    background: var(--amber); border: none;
+    color: white; padding: 14px 28px; border-radius: 999px;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+    cursor: pointer; align-self: flex-start;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-submit:hover { background: #C4731A; transform: scale(1.02); }
+
+  footer {
+    background: var(--green-deep);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    text-align: center; padding: 28px;
+    color: rgba(255,255,255,0.3); font-size: 12px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    section { padding: 64px 20px; }
+    #hero { padding: 0 20px 60px; }
+    .hero-circles { display: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .photos-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .photo-slot:first-child { grid-row: auto; }
+    .event-form { grid-template-columns: 1fr; }
+    .event-form textarea { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo" style="text-decoration:none;">Leefstraat<br>Maurice Verdoncklaan</a>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#kalender">Activiteiten</a></li>
+    <li><a href="#fotos">Foto's</a></li>
+    <li><a href="regels.html">Regels</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-circles" aria-hidden="true">
+    <div class="circle-outer"></div>
+    <div class="circle-mid"></div>
+    <div class="circle-inner"></div>
+    <div class="circle-year">2026</div>
+  </div>
+  <div style="position:relative">
+    <div class="hero-tag">Zomer 2026 · Gentbrugge</div>
+    <h1 class="hero-title">Leefstraat<br><em>Maurice</em><br>Verdoncklaan</h1>
+    <p class="hero-sub">Onze straat leeft! Van juni tot augustus maken we samen van de Maurice Verdoncklaan een plek voor ontmoeting, spel en buurtgevoel.</p>
+    <a href="#kalender" style="display:inline-block; margin-top:32px; background:var(--green-mid); color:white; padding:14px 28px; border-radius:999px; text-decoration:none; font-size:15px; font-weight:500; transition:background 0.2s;" onmouseover="this.style.background='var(--green-deep)'" onmouseout="this.style.background='var(--green-mid)'">Bekijk de activiteiten →</a>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- KALENDER -->
+<section id="kalender">
+  <div class="section-tag">Agenda</div>
+  <h2 class="section-title">Wat staat er op het programma?</h2>
+  <div class="events-grid" id="events-grid">
+    <!-- Gevuld via JS -->
+  </div>
+</section>
+
+<!-- FOTO'S -->
+<section id="fotos">
+  <div class="section-tag">Herinneringen</div>
+  <h2 class="section-title">Foto's van de straat</h2>
+  <div class="photos-grid" id="photos-grid">
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+    <div class="photo-slot"><div class="photo-icon">📷</div><span>Foto komt hier</span></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag">Neem contact op</div>
+  <h2 class="section-title">Vragen of ideeën?</h2>
+  <div class="contact-grid">
+    <div class="contact-text">
+      <p>Wil je meehelpen, een activiteit voorstellen of gewoon meer info? Stuur ons een berichtje — we horen graag van onze buren.</p>
+      <p style="margin-top:20px; font-size:14px; opacity:0.5;">Leefstraat Maurice Verdoncklaan · Gentbrugge · 2026</p>
+    </div>
+    <form class="contact-form" onsubmit="submitForm(event)">
+      <input type="text" placeholder="Jouw naam" required>
+      <input type="email" placeholder="E-mailadres" required>
+      <textarea placeholder="Jouw bericht…" rows="4" required></textarea>
+      <button type="submit" class="btn-submit">Versturen →</button>
+      <p id="form-thanks" style="display:none; color:var(--green-light); font-size:14px;">Bedankt! We nemen snel contact op. 🌿</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Leefstraat Maurice Verdoncklaan · Gentbrugge · Met ❤️ door de buurt
+</footer>
+    <div class="admin-sub">Beheer de activiteiten en foto's van de site.</div>
+
+    <!-- Login -->
+    <div id="admin-login">
+      <input class="admin-input" type="password" id="pw-input" placeholder="Wachtwoord" onkeydown="if(event.key==='Enter')checkPw()">
+      <p class="login-error" id="login-error">Verkeerd wachtwoord. Probeer opnieuw.</p>
+      <button class="btn-green" onclick="checkPw()">Inloggen</button>
+    </div>
+
+    <!-- Content -->
+    <div id="admin-content">
+
+      <!-- Activiteiten -->
+      <div class="admin-section">
+        <h3>Activiteiten beheren</h3>
+        <div class="event-form">
+          <input type="date" id="new-date" placeholder="Datum">
+          <input type="text" id="new-name" placeholder="Naam van de activiteit">
+          <textarea id="new-note" placeholder="Notitie (optioneel)" rows="2"></textarea>
+        </div>
+        <button class="btn-green" onclick="addEvent()">+ Activiteit toevoegen</button>
+        <div class="event-list" id="admin-event-list"></div>
+      </div>
+
+      <!-- Foto's -->
+      <div class="admin-section">
+        <h3>Foto's toevoegen</h3>
+        <div class="photo-upload-area" onclick="document.getElementById('photo-file-input').click()">
+          📷 Klik om foto's te uploaden (JPG, PNG)
+        </div>
+        <input type="file" id="photo-file-input" accept="image/*" multiple onchange="handlePhotos(event)">
+        <div class="photo-preview-grid" id="photo-preview-grid"></div>
+        <p style="font-size:12px; color:var(--text-light); margin-top:10px;">Foto's worden lokaal opgeslagen in de browser. Voor permanente opslag: upload ze via GitHub.</p>
+      </div>
+
+      <div class="admin-save-msg" id="save-msg">✓ Wijzigingen opgeslagen!</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──
+const ADMIN_PW = 'LeefstraatMV2026*';
+
+const defaultEvents = [
+  { date: '2026-06-05', name: 'Opening met hot dogs', note: 'Kookwurstje regelen — check bij Julien' },
+  { date: '2026-07-11', name: 'Spelletjesavond afterwork', note: '' },
+  { date: '2026-08-16', name: 'Koffie & taart', note: '' },
+  { date: '2026-08-23', name: 'BBQ', note: '' }
+];
+
+function loadEvents() {
+  const stored = localStorage.getItem('leefstraat-events');
+  return stored ? JSON.parse(stored) : defaultEvents;
+}
+function saveEvents(evts) {
+  localStorage.setItem('leefstraat-events', JSON.stringify(evts));
+}
+
+const MONTHS_NL = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+
+function parseDate(d) {
+  const parts = d.split('-');
+  return { day: parseInt(parts[2]), monthIdx: parseInt(parts[1])-1, year: parts[0] };
+}
+
+function renderPublicEvents() {
+  const evts = loadEvents().sort((a,b) => a.date.localeCompare(b.date));
+  const grid = document.getElementById('events-grid');
+  grid.innerHTML = evts.map(e => {
+    const p = parseDate(e.date);
+    return `<div class="event-card">
+      <div class="event-date">${p.day}</div>
+      <div class="event-month">${MONTHS_NL[p.monthIdx]} ${p.year}</div>
+      <div class="event-name">${e.name}</div>
+      ${e.note ? `<div class="event-note">${e.note}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function renderAdminEvents() {
+  const evts = loadEvents().sort((a,b) => a.date.localeCompare(b.date));
+  const list = document.getElementById('admin-event-list');
+  list.innerHTML = evts.map((e,i) => {
+    const p = parseDate(e.date);
+    return `<div class="event-list-item">
+      <div class="event-list-item-info">
+        <span class="event-list-item-date">${p.day} ${MONTHS_NL[p.monthIdx]}</span>
+        <span class="event-list-item-name"> — ${e.name}</span>
+        ${e.note ? `<div style="font-size:12px;color:var(--text-light);margin-top:2px">${e.note}</div>` : ''}
+      </div>
+      <button class="btn-remove" onclick="removeEvent(${i})" aria-label="Verwijder">✕</button>
+    </div>`;
+  }).join('');
+}
+
+function addEvent() {
+  const date = document.getElementById('new-date').value;
+  const name = document.getElementById('new-name').value.trim();
+  const note = document.getElementById('new-note').value.trim();
+  if (!date || !name) { alert('Datum en naam zijn verplicht.'); return; }
+  const evts = loadEvents();
+  evts.push({ date, name, note });
+  saveEvents(evts);
+  document.getElementById('new-date').value = '';
+  document.getElementById('new-name').value = '';
+  document.getElementById('new-note').value = '';
+  renderPublicEvents();
+  renderAdminEvents();
+  showSaveMsg();
+}
+
+function removeEvent(idx) {
+  const evts = loadEvents().sort((a,b) => a.date.localeCompare(b.date));
+  evts.splice(idx, 1);
+  saveEvents(evts);
+  renderPublicEvents();
+  renderAdminEvents();
+  showSaveMsg();
+}
+
+// ── ADMIN AUTH ──
+function openAdmin() {
+  document.getElementById('admin-overlay').classList.add('open');
+  document.getElementById('pw-input').focus();
+}
+function closeAdmin() {
+  document.getElementById('admin-overlay').classList.remove('open');
+}
+document.getElementById('admin-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeAdmin();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAdmin(); });
+
+function checkPw() {
+  const val = document.getElementById('pw-input').value;
+  if (val === ADMIN_PW) {
+    document.getElementById('admin-login').style.display = 'none';
+    document.getElementById('admin-content').style.display = 'block';
+    renderAdminEvents();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+// ── FOTO'S ──
+function handlePhotos(e) {
+  const files = Array.from(e.target.files);
+  const grid = document.getElementById('photo-preview-grid');
+  const pubGrid = document.getElementById('photos-grid');
+  pubGrid.innerHTML = '';
+  files.slice(0,5).forEach((f, i) => {
+    const url = URL.createObjectURL(f);
+    const thumb = document.createElement('img');
+    thumb.src = url; thumb.className = 'photo-preview-thumb'; thumb.alt = f.name;
+    grid.appendChild(thumb);
+    const slot = document.createElement('div');
+    slot.className = 'photo-slot';
+    const img = document.createElement('img');
+    img.src = url; img.alt = f.name;
+    slot.appendChild(img);
+    pubGrid.appendChild(slot);
+  });
+  showSaveMsg();
+}
+
+function showSaveMsg() {
+  const msg = document.getElementById('save-msg');
+  msg.style.display = 'block';
+  setTimeout(() => msg.style.display = 'none', 2500);
+}
+
+// ── CONTACT FORM ──
+function submitForm(e) {
+  e.preventDefault();
+  e.target.querySelectorAll('input, textarea').forEach(el => el.value = '');
+  document.getElementById('form-thanks').style.display = 'block';
+}
+
+// ── INIT ──
+renderPublicEvents();
+</script>
+</body>
+</html>

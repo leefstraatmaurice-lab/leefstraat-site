@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin – Leefstraat Maurice Verdoncklaan</title>
+<!-- Geblokkeerd voor zoekmachines -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFFFF;
+    --green-deep: #2D5016;
+    --green-mid: #4A7C2F;
+    --green-light: #8CB87A;
+    --green-pale: #E8F0E2;
+    --amber: #D4832A;
+    --amber-light: #F5DDB4;
+    --sand: #EDE8DC;
+    --text-dark: #1A1A18;
+    --text-mid: #4A4A40;
+    --text-light: #8A8A7A;
+    --danger: #C0392B;
+    --radius: 12px;
+  }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream); color: var(--text-dark);
+    min-height: 100vh; display: flex; flex-direction: column;
+  }
+
+  /* ── LOGIN SCHERM ── */
+  #login-screen {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    padding: 40px 20px;
+  }
+  .login-box {
+    background: var(--warm-white); border-radius: 16px;
+    padding: 48px 40px; width: 100%; max-width: 400px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 8px 40px rgba(45,80,22,0.08);
+  }
+  .login-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px; font-weight: 700; color: var(--green-deep);
+    margin-bottom: 32px; opacity: 0.6;
+  }
+  .login-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700; color: var(--green-deep);
+    margin-bottom: 6px;
+  }
+  .login-sub { font-size: 14px; color: var(--text-light); margin-bottom: 28px; }
+  .login-input {
+    width: 100%; border: 1.5px solid var(--sand); border-radius: 8px;
+    padding: 13px 16px; font-family: 'DM Sans', sans-serif; font-size: 15px;
+    color: var(--text-dark); outline: none; transition: border 0.2s;
+    margin-bottom: 12px; background: var(--cream);
+  }
+  .login-input:focus { border-color: var(--green-mid); background: white; }
+  .login-input.error { border-color: var(--danger); }
+  .login-error {
+    color: var(--danger); font-size: 13px; margin-bottom: 12px; display: none;
+  }
+  .btn-login {
+    width: 100%; background: var(--green-mid); border: none; color: white;
+    padding: 14px; border-radius: 999px; font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500; cursor: pointer; transition: background 0.2s;
+  }
+  .btn-login:hover { background: var(--green-deep); }
+  .login-attempts { font-size: 12px; color: var(--text-light); text-align: center; margin-top: 14px; }
+
+  /* ── ADMIN DASHBOARD ── */
+  #admin-screen { display: none; flex: 1; flex-direction: column; }
+
+  header {
+    background: var(--green-deep); padding: 20px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .header-logo {
+    font-family: 'Playfair Display', serif; font-size: 18px;
+    font-weight: 700; color: white;
+  }
+  .header-badge {
+    background: rgba(255,255,255,0.15); color: white;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 999px;
+  }
+  .btn-logout {
+    background: rgba(255,255,255,0.1); border: none; color: white;
+    padding: 8px 18px; border-radius: 999px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; transition: background 0.2s;
+  }
+  .btn-logout:hover { background: rgba(255,255,255,0.2); }
+
+  .dashboard {
+    padding: 48px; max-width: 860px; margin: 0 auto; width: 100%;
+    display: flex; flex-direction: column; gap: 36px;
+  }
+
+  .admin-card {
+    background: var(--warm-white); border-radius: var(--radius);
+    border: 1px solid rgba(0,0,0,0.06); overflow: hidden;
+  }
+  .card-header {
+    padding: 20px 28px; border-bottom: 1px solid var(--sand);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif; font-size: 18px;
+    font-weight: 700; color: var(--green-deep);
+  }
+  .card-body { padding: 28px; }
+
+  /* Activiteiten */
+  .event-form {
+    display: grid; grid-template-columns: 160px 1fr; gap: 12px; margin-bottom: 16px;
+  }
+  .event-form textarea { grid-column: span 2; resize: none; }
+  .form-input {
+    border: 1.5px solid var(--sand); border-radius: 8px;
+    padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 14px;
+    color: var(--text-dark); outline: none; transition: border 0.2s; width: 100%;
+    background: var(--cream);
+  }
+  .form-input:focus { border-color: var(--green-mid); background: white; }
+
+  .btn-green {
+    background: var(--green-mid); border: none; color: white;
+    padding: 10px 22px; border-radius: 999px; font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.2s;
+  }
+  .btn-green:hover { background: var(--green-deep); }
+
+  .event-list { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; }
+  .event-row {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--green-pale); border-radius: 8px; padding: 12px 16px;
+  }
+  .event-row-date {
+    font-weight: 500; color: var(--green-deep); font-size: 14px;
+    min-width: 80px; flex-shrink: 0;
+  }
+  .event-row-name { flex: 1; font-size: 14px; color: var(--text-mid); }
+  .event-row-note { font-size: 12px; color: var(--text-light); }
+  .btn-remove {
+    background: none; border: none; color: var(--danger);
+    cursor: pointer; font-size: 18px; padding: 4px; line-height: 1;
+    transition: opacity 0.2s; flex-shrink: 0;
+  }
+  .btn-remove:hover { opacity: 0.6; }
+
+  /* Foto's */
+  .upload-zone {
+    border: 2px dashed var(--green-light); border-radius: 10px;
+    padding: 36px; text-align: center; cursor: pointer;
+    color: var(--text-light); font-size: 14px; transition: background 0.2s;
+  }
+  .upload-zone:hover { background: var(--green-pale); }
+  .upload-zone-icon { font-size: 32px; margin-bottom: 10px; opacity: 0.5; }
+  #photo-file { display: none; }
+  .thumb-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .thumb-wrap { position: relative; }
+  .thumb-img {
+    width: 88px; height: 88px; object-fit: cover;
+    border-radius: 8px; border: 2px solid var(--sand); display: block;
+  }
+  .thumb-del {
+    position: absolute; top: -6px; right: -6px;
+    background: var(--danger); color: white; border: none;
+    width: 20px; height: 20px; border-radius: 50%; font-size: 12px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+  }
+
+  /* Wachtwoord wijzigen */
+  .pw-form { display: flex; flex-direction: column; gap: 12px; max-width: 360px; }
+  .pw-hint { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+
+  /* Instellingen */
+  .settings-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0; border-bottom: 1px solid var(--sand);
+  }
+  .settings-row:last-child { border-bottom: none; }
+  .settings-label { font-size: 14px; font-weight: 500; color: var(--text-dark); }
+  .settings-sub { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+  .settings-link {
+    font-size: 13px; color: var(--green-mid); text-decoration: none; font-weight: 500;
+  }
+  .settings-link:hover { text-decoration: underline; }
+
+  /* Toast */
+  #toast {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--green-deep); color: white;
+    padding: 12px 24px; border-radius: 999px; font-size: 14px;
+    transition: transform 0.3s ease; z-index: 999; pointer-events: none;
+    white-space: nowrap;
+  }
+  #toast.show { transform: translateX(-50%) translateY(0); }
+
+  footer {
+    background: var(--sand); text-align: center; padding: 20px;
+    color: var(--text-light); font-size: 12px; margin-top: auto;
+  }
+
+  @media (max-width: 640px) {
+    header { padding: 16px 20px; }
+    .dashboard { padding: 24px 20px; }
+    .event-form { grid-template-columns: 1fr; }
+    .event-form textarea { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Leefstraat Maurice Verdoncklaan</div>
+    <div class="login-title">Admin</div>
+    <div class="login-sub">Alleen voor organisatoren</div>
+    <input class="login-input" type="password" id="pw-field" placeholder="Wachtwoord"
+      onkeydown="if(event.key==='Enter') doLogin()">
+    <div class="login-error" id="login-error">Verkeerd wachtwoord. Probeer opnieuw.</div>
+    <button class="btn-login" onclick="doLogin()">Inloggen</button>
+    <div class="login-attempts" id="attempts-msg"></div>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="admin-screen">
+  <header>
+    <div class="header-logo">Leefstraat MV · Admin</div>
+    <span class="header-badge">Beheer</span>
+    <button class="btn-logout" onclick="doLogout()">Uitloggen</button>
+  </header>
+
+  <div class="dashboard">
+
+    <!-- ACTIVITEITEN -->
+    <div class="admin-card">
+      <div class="card-header">
+        <div class="card-title">🗓 Activiteiten</div>
+      </div>
+      <div class="card-body">
+        <div class="event-form">
+          <input type="date" id="new-date" class="form-input">
+          <input type="text" id="new-name" class="form-input" placeholder="Naam van de activiteit">
+          <textarea id="new-note" class="form-input" rows="2" placeholder="Notitie (optioneel)"></textarea>
+        </div>
+        <button class="btn-green" onclick="addEvent()">+ Activiteit toevoegen</button>
+        <div class="event-list" id="event-list"></div>
+      </div>
+    </div>
+
+    <!-- FOTO'S -->
+    <div class="admin-card">
+      <div class="card-header">
+        <div class="card-title">📷 Foto's beheren</div>
+      </div>
+      <div class="card-body">
+        <div class="upload-zone" onclick="document.getElementById('photo-file').click()">
+          <div class="upload-zone-icon">📁</div>
+          Klik om foto's te uploaden — JPG, PNG, WebP
+        </div>
+        <input type="file" id="photo-file" accept="image/*" multiple onchange="handlePhotos(event)">
+        <div class="thumb-grid" id="thumb-grid"></div>
+        <p style="font-size:12px;color:var(--text-light);margin-top:12px;">
+          Foto's worden opgeslagen in je browser. Voor permanente opslag: upload ook naar je GitHub-repo.
+        </p>
+      </div>
+    </div>
+
+    <!-- WACHTWOORD WIJZIGEN -->
+    <div class="admin-card">
+      <div class="card-header">
+        <div class="card-title">🔒 Wachtwoord wijzigen</div>
+      </div>
+      <div class="card-body">
+        <div class="pw-form">
+          <input type="password" id="pw-new" class="form-input" placeholder="Nieuw wachtwoord">
+          <input type="password" id="pw-confirm" class="form-input" placeholder="Bevestig nieuw wachtwoord">
+          <button class="btn-green" onclick="changePassword()">Wachtwoord opslaan</button>
+          <div class="pw-hint">⚠️ Na het wijzigen moet je de nieuwe hash kopiëren naar je admin.html bestand.</div>
+          <div id="pw-result" style="display:none; margin-top:10px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSTELLINGEN -->
+    <div class="admin-card">
+      <div class="card-header">
+        <div class="card-title">⚙️ Snelle links</div>
+      </div>
+      <div class="card-body">
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Publieke website</div>
+            <div class="settings-sub">Bekijk hoe de site eruitziet voor bezoekers</div>
+          </div>
+          <a href="index.html" class="settings-link" target="_blank">Openen →</a>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Regelspagina</div>
+            <div class="settings-sub">Regels van de Leefstraat</div>
+          </div>
+          <a href="regels.html" class="settings-link" target="_blank">Openen →</a>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Fotopagina</div>
+            <div class="settings-sub">Fotoalbum en gallerij</div>
+          </div>
+          <a href="fotos.html" class="settings-link" target="_blank">Openen →</a>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Facebook-groep</div>
+            <div class="settings-sub">Leefstraat Maurice Verdoncklaan</div>
+          </div>
+          <a href="https://www.facebook.com/groups/1399586126957590" target="_blank" class="settings-link">Openen →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>&copy; 2026 Leefstraat Maurice Verdoncklaan · Admin paneel · Niet delen</footer>
+</div>
+
+<div id="toast">✓ Opgeslagen</div>
+
+<script>
+// ── BEVEILIGING ──
+// SHA-256 hash van "LeefstraatMV2026*"
+// Wijzig ALLEEN deze hash als je het wachtwoord verandert
+const PW_HASH = '67c25b7bbc4f2a00d0a28a4bc5a18637f6b6394f1468ef6c22c78c02b50ab9d9';
+
+let attempts = 0;
+const MAX_ATTEMPTS = 5;
+let lockUntil = parseInt(sessionStorage.getItem('lf-lock') || '0');
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+async function doLogin() {
+  const now = Date.now();
+  if (now < lockUntil) {
+    const secs = Math.ceil((lockUntil - now) / 1000);
+    showError(`Te veel pogingen. Wacht nog ${secs} seconden.`);
+    return;
+  }
+  const pw = document.getElementById('pw-field').value;
+  const hash = await sha256(pw);
+  if (hash === PW_HASH) {
+    attempts = 0;
+    sessionStorage.setItem('lf-auth', '1');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-screen').style.display = 'flex';
+    renderEvents();
+    renderThumbs();
+  } else {
+    attempts++;
+    document.getElementById('pw-field').value = '';
+    document.getElementById('pw-field').classList.add('error');
+    if (attempts >= MAX_ATTEMPTS) {
+      lockUntil = Date.now() + 60000;
+      sessionStorage.setItem('lf-lock', lockUntil);
+      showError('Te veel pogingen. Geblokkeerd voor 60 seconden.');
+    } else {
+      showError(`Verkeerd wachtwoord. Nog ${MAX_ATTEMPTS - attempts} poging(en).`);
+    }
+  }
+}
+
+function showError(msg) {
+  const el = document.getElementById('login-error');
+  el.textContent = msg; el.style.display = 'block';
+  setTimeout(() => { el.style.display = 'none'; }, 4000);
+}
+
+function doLogout() {
+  sessionStorage.removeItem('lf-auth');
+  document.getElementById('admin-screen').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('pw-field').value = '';
+}
+
+// Auto-login check
+if (sessionStorage.getItem('lf-auth') === '1') {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('admin-screen').style.display = 'flex';
+}
+
+// ── ACTIVITEITEN ──
+const MONTHS = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+const DEFAULT_EVENTS = [
+  { date: '2026-06-05', name: 'Opening met hot dogs', note: 'Kookwurstje regelen — check bij Julien' },
+  { date: '2026-07-11', name: 'Spelletjesavond afterwork', note: '' },
+  { date: '2026-08-16', name: 'Koffie & taart', note: '' },
+  { date: '2026-08-23', name: 'BBQ', note: '' }
+];
+
+function loadEvents() {
+  return JSON.parse(localStorage.getItem('lf-events') || JSON.stringify(DEFAULT_EVENTS));
+}
+function saveEventsData(evts) {
+  localStorage.setItem('lf-events', JSON.stringify(evts));
+}
+function fmtDate(d) {
+  const p = d.split('-');
+  return `${parseInt(p[2])} ${MONTHS[parseInt(p[1])-1]}`;
+}
+
+function renderEvents() {
+  const evts = loadEvents().sort((a,b) => a.date.localeCompare(b.date));
+  document.getElementById('event-list').innerHTML = evts.length === 0
+    ? '<p style="color:var(--text-light);font-size:14px;">Nog geen activiteiten.</p>'
+    : evts.map((e,i) => `
+      <div class="event-row">
+        <div class="event-row-date">${fmtDate(e.date)}</div>
+        <div class="event-row-name">
+          ${e.name}
+          ${e.note ? `<div class="event-row-note">${e.note}</div>` : ''}
+        </div>
+        <button class="btn-remove" onclick="removeEvent(${i})" aria-label="Verwijder">✕</button>
+      </div>`).join('');
+}
+
+function addEvent() {
+  const date = document.getElementById('new-date').value;
+  const name = document.getElementById('new-name').value.trim();
+  const note = document.getElementById('new-note').value.trim();
+  if (!date || !name) { showToast('⚠️ Datum en naam zijn verplicht'); return; }
+  const evts = loadEvents();
+  evts.push({ date, name, note });
+  saveEventsData(evts);
+  document.getElementById('new-date').value = '';
+  document.getElementById('new-name').value = '';
+  document.getElementById('new-note').value = '';
+  renderEvents();
+  showToast('✓ Activiteit toegevoegd');
+}
+
+function removeEvent(idx) {
+  const evts = loadEvents().sort((a,b) => a.date.localeCompare(b.date));
+  if (!confirm(`"${evts[idx].name}" verwijderen?`)) return;
+  evts.splice(idx, 1);
+  saveEventsData(evts);
+  renderEvents();
+  showToast('✓ Activiteit verwijderd');
+}
+
+// ── FOTO'S ──
+let photoUrls = JSON.parse(sessionStorage.getItem('lf-photos') || '[]');
+
+function handlePhotos(e) {
+  const files = Array.from(e.target.files);
+  let loaded = 0;
+  files.forEach(f => {
+    const r = new FileReader();
+    r.onload = ev => {
+      photoUrls.push(ev.target.result);
+      loaded++;
+      if (loaded === files.length) {
+        try { sessionStorage.setItem('lf-photos', JSON.stringify(photoUrls)); } catch(e) {}
+        renderThumbs();
+        showToast(`✓ ${files.length} foto('s) toegevoegd`);
+      }
+    };
+    r.readAsDataURL(f);
+  });
+  e.target.value = '';
+}
+
+function renderThumbs() {
+  document.getElementById('thumb-grid').innerHTML = photoUrls.map((src, i) => `
+    <div class="thumb-wrap">
+      <img src="${src}" class="thumb-img" alt="Foto ${i+1}">
+      <button class="thumb-del" onclick="removePhoto(${i})" aria-label="Verwijder foto">✕</button>
+    </div>`).join('');
+}
+
+function removePhoto(idx) {
+  photoUrls.splice(idx, 1);
+  try { sessionStorage.setItem('lf-photos', JSON.stringify(photoUrls)); } catch(e) {}
+  renderThumbs();
+  showToast('✓ Foto verwijderd');
+}
+
+// ── WACHTWOORD WIJZIGEN ──
+async function changePassword() {
+  const pw1 = document.getElementById('pw-new').value;
+  const pw2 = document.getElementById('pw-confirm').value;
+  const result = document.getElementById('pw-result');
+  if (!pw1 || pw1.length < 8) {
+    result.style.display = 'block';
+    result.innerHTML = '<span style="color:var(--danger)">Wachtwoord moet minstens 8 tekens zijn.</span>';
+    return;
+  }
+  if (pw1 !== pw2) {
+    result.style.display = 'block';
+    result.innerHTML = '<span style="color:var(--danger)">Wachtwoorden komen niet overeen.</span>';
+    return;
+  }
+  const hash = await sha256(pw1);
+  result.style.display = 'block';
+  result.innerHTML = `
+    <p style="font-size:13px;color:var(--text-mid);margin-bottom:8px;">Vervang de waarde van <code>PW_HASH</code> in <strong>admin.html</strong> door:</p>
+    <code style="display:block;background:var(--cream);padding:12px;border-radius:8px;font-size:12px;word-break:break-all;border:1px solid var(--sand)">${hash}</code>
+    <p style="font-size:12px;color:var(--text-light);margin-top:8px;">Sla het bestand op en upload het opnieuw naar GitHub.</p>`;
+  document.getElementById('pw-new').value = '';
+  document.getElementById('pw-confirm').value = '';
+}
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// Init
+if (sessionStorage.getItem('lf-auth') === '1') { renderEvents(); renderThumbs(); }
+</script>
+</body>
+</html>

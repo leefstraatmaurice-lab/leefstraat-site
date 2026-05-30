@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regels van de straat – Leefstraat Maurice Verdoncklaan 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFFFF;
+    --green-deep: #2D5016;
+    --green-mid: #4A7C2F;
+    --green-light: #8CB87A;
+    --green-pale: #E8F0E2;
+    --amber: #D4832A;
+    --amber-light: #F5DDB4;
+    --sand: #EDE8DC;
+    --text-dark: #1A1A18;
+    --text-mid: #4A4A40;
+    --text-light: #8A8A7A;
+    --radius: 12px;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(250,247,242,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(45,80,22,0.1);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--green-deep);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-mid);
+    font-size: 14px; font-weight: 500; letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--green-deep); }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 160px 48px 80px;
+    background: var(--sand);
+    position: relative; overflow: hidden;
+  }
+  .page-header::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(45,80,22,0.15), transparent);
+  }
+  .header-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 50% 80% at 90% 50%, rgba(139,184,122,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .page-tag {
+    display: inline-block;
+    background: var(--amber-light); color: var(--amber);
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 6px 14px;
+    border-radius: 999px; margin-bottom: 20px;
+  }
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 68px);
+    font-weight: 900; line-height: 1;
+    letter-spacing: -0.03em; color: var(--green-deep);
+    position: relative;
+  }
+  .page-title em { font-style: italic; color: var(--amber); }
+  .page-intro {
+    margin-top: 20px; max-width: 560px;
+    font-size: 16px; color: var(--text-mid);
+    line-height: 1.7; font-weight: 300;
+    position: relative;
+  }
+
+  /* ── MAIN CONTENT ── */
+  main { padding: 80px 48px 120px; max-width: 900px; margin: 0 auto; }
+
+  /* ── RULES LIST ── */
+  .rules-section { margin-bottom: 64px; }
+  .rules-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--green-deep); margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--green-pale);
+  }
+  .rules-list { display: flex; flex-direction: column; gap: 4px; }
+  .rule-item {
+    display: flex; align-items: flex-start; gap: 18px;
+    padding: 20px 24px;
+    background: var(--warm-white);
+    border-radius: var(--radius);
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .rule-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 16px rgba(45,80,22,0.07);
+  }
+  .rule-icon {
+    font-size: 26px; line-height: 1;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .rule-body { flex: 1; }
+  .rule-title {
+    font-size: 16px; font-weight: 500;
+    color: var(--text-dark); margin-bottom: 4px;
+  }
+  .rule-desc {
+    font-size: 13px; color: var(--text-light); line-height: 1.5;
+  }
+  .rule-badge {
+    flex-shrink: 0;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 4px 10px;
+    border-radius: 999px; align-self: center;
+  }
+  .badge-must {
+    background: rgba(212,131,42,0.12); color: var(--amber);
+  }
+  .badge-kind {
+    background: var(--green-pale); color: var(--green-mid);
+  }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: var(--green-deep); color: white;
+    border-radius: var(--radius); padding: 32px 36px;
+    margin-top: 48px;
+  }
+  .info-box-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700; margin-bottom: 12px;
+  }
+  .info-box-text {
+    font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.7);
+  }
+  .info-box-link {
+    display: inline-block; margin-top: 16px;
+    background: var(--amber); color: white;
+    padding: 10px 22px; border-radius: 999px;
+    text-decoration: none; font-size: 14px; font-weight: 500;
+    transition: background 0.2s;
+  }
+  .info-box-link:hover { background: #C4731A; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--green-deep);
+    text-align: center; padding: 28px;
+    color: rgba(255,255,255,0.3); font-size: 12px;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .page-header { padding: 120px 20px 60px; }
+    main { padding: 48px 20px 80px; }
+    .rule-item { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Leefstraat<br>Maurice Verdoncklaan</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#kalender">Activiteiten</a></li>
+    <li><a href="index.html#fotos">Foto's</a></li>
+    <li><a href="regels.html" class="active">Regels</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="header-bg"></div>
+  <div class="page-tag">Samenleven</div>
+  <h1 class="page-title">Regels van<br>de <em>straat</em></h1>
+  <p class="page-intro">Om er voor iedereen een fijne zomer van te maken, spreken we een aantal eenvoudige afspraken af. Geen rocket science — gewoon gezond verstand en respect voor elkaar.</p>
+</div>
+
+<main>
+
+  <!-- SECTIE 1: Verkeer & veiligheid -->
+  <div class="rules-section">
+    <h2 class="rules-section-title">Verkeer & veiligheid</h2>
+    <div class="rules-list">
+      <div class="rule-item">
+        <div class="rule-icon">🚗</div>
+        <div class="rule-body">
+          <div class="rule-title">Geen doorgaand verkeer tijdens activiteiten</div>
+          <div class="rule-desc">Wanneer de straat is afgezet voor een activiteit, is gemotoriseerd verkeer niet toegestaan. Bewoners met een dringende nood: spreek een organisator aan.</div>
+        </div>
+        <span class="rule-badge badge-must">Verplicht</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">🚲</div>
+        <div class="rule-body">
+          <div class="rule-title">Fietsers rijden stapvoets</div>
+          <div class="rule-desc">Fietsen mag, maar aan wandelsnelheid. Kinderen spelen overal — hou daar rekening mee.</div>
+        </div>
+        <span class="rule-badge badge-must">Verplicht</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">👶</div>
+        <div class="rule-body">
+          <div class="rule-title">Kinderen hebben voorrang</div>
+          <div class="rule-desc">De straat is tijdens activiteiten in de eerste plaats een speelruimte. Volwassenen passen zich aan.</div>
+        </div>
+        <span class="rule-badge badge-kind">Vriendelijk verzoek</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTIE 2: Geluid & sfeer -->
+  <div class="rules-section">
+    <h2 class="rules-section-title">Geluid & sfeer</h2>
+    <div class="rules-list">
+      <div class="rule-item">
+        <div class="rule-icon">🎵</div>
+        <div class="rule-body">
+          <div class="rule-title">Muziek stopt om 22u</div>
+          <div class="rule-desc">We respecteren de nachtrust van alle bewoners. Muziek en luide activiteiten eindigen uiterlijk om 22u00.</div>
+        </div>
+        <span class="rule-badge badge-must">Verplicht</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">😊</div>
+        <div class="rule-body">
+          <div class="rule-title">Iedereen is welkom</div>
+          <div class="rule-desc">Jong, oud, met of zonder kinderen — de Leefstraat is voor alle bewoners. Inclusief en open.</div>
+        </div>
+        <span class="rule-badge badge-kind">Vriendelijk verzoek</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTIE 3: Netheid & respect -->
+  <div class="rules-section">
+    <h2 class="rules-section-title">Netheid & respect</h2>
+    <div class="rules-list">
+      <div class="rule-item">
+        <div class="rule-icon">🧹</div>
+        <div class="rule-body">
+          <div class="rule-title">Rommel ruimen we samen op</div>
+          <div class="rule-desc">Na elke activiteit helpen aanwezigen mee met opruimen. Gebruik de voorziene vuilbakken — die zijn dit jaar groter dan vorig jaar!</div>
+        </div>
+        <span class="rule-badge badge-must">Verplicht</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">🌿</div>
+        <div class="rule-body">
+          <div class="rule-title">Respect voor tuinen en gevels</div>
+          <div class="rule-desc">Bloemenbakken, gevels en tuinen zijn privé-eigendom. Handen thuis, ogen open voor de schoonheid.</div>
+        </div>
+        <span class="rule-badge badge-must">Verplicht</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">🐕</div>
+        <div class="rule-body">
+          <div class="rule-title">Honden aan de leiband</div>
+          <div class="rule-desc">Tijdens activiteiten zijn er veel kinderen aanwezig. Houd honden aangelijnd en ruim uitwerpselen op.</div>
+        </div>
+        <span class="rule-badge badge-must">Verplicht</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTIE 4: Organisatie -->
+  <div class="rules-section">
+    <h2 class="rules-section-title">Organisatie & materiaal</h2>
+    <div class="rules-list">
+      <div class="rule-item">
+        <div class="rule-icon">📋</div>
+        <div class="rule-body">
+          <div class="rule-title">Materiaal is van iedereen</div>
+          <div class="rule-desc">Stoelen, tafels, spellen — het materiaal is voor gemeenschappelijk gebruik. Behandel het met zorg en zet het terug op de juiste plaats.</div>
+        </div>
+        <span class="rule-badge badge-kind">Vriendelijk verzoek</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">🙋</div>
+        <div class="rule-body">
+          <div class="rule-title">Vragen? Spreek een organisator aan</div>
+          <div class="rule-desc">De organisatoren zijn herkenbaar aanwezig tijdens elke activiteit. Bij twijfel, vragen of problemen: stap gewoon op ons af.</div>
+        </div>
+        <span class="rule-badge badge-kind">Vriendelijk verzoek</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">💡</div>
+        <div class="rule-body">
+          <div class="rule-title">Ideeën zijn altijd welkom</div>
+          <div class="rule-desc">Heb je een idee voor een activiteit of een suggestie? Laat het weten via het contactformulier of spreek ons aan!</div>
+        </div>
+        <span class="rule-badge badge-kind">Vriendelijk verzoek</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <div class="info-box-title">🌱 De gouden regel</div>
+    <div class="info-box-text">Behandel de straat en je buren zoals je zelf behandeld wil worden. Dat is eigenlijk het enige wat telt. De rest volgt vanzelf.</div>
+    <a href="index.html#contact" class="info-box-link">Contacteer de organisatoren →</a>
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2026 Leefstraat Maurice Verdoncklaan · Gentbrugge · Met ❤️ door de buurt
+</footer>
+
+</body>
+</html>
