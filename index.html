@@ -280,12 +280,13 @@
       <p>Wil je meehelpen, een activiteit voorstellen of gewoon meer info? Stuur ons een berichtje — we horen graag van onze buren.</p>
       <p style="margin-top:20px;font-size:14px;opacity:0.5;">Leefstraat Maurice Verdoncklaan · Gentbrugge · 2026</p>
     </div>
-    <form class="contact-form" onsubmit="submitForm(event)">
-      <input type="text" placeholder="Jouw naam" required>
-      <input type="email" placeholder="E-mailadres" required>
-      <textarea placeholder="Jouw bericht…" rows="4" required></textarea>
-      <button type="submit" class="btn-submit">Versturen →</button>
+    <form class="contact-form" id="contact-form">
+      <input type="text" name="naam" placeholder="Jouw naam" required>
+      <input type="email" name="email" placeholder="E-mailadres" required>
+      <textarea name="bericht" placeholder="Jouw bericht…" rows="4" required></textarea>
+      <button type="submit" class="btn-submit" id="submit-btn">Versturen →</button>
       <p id="form-thanks" style="display:none;color:var(--green-light);font-size:14px;">Bedankt! We nemen snel contact op. 🌿</p>
+      <p id="form-error" style="display:none;color:#f87171;font-size:14px;">Er ging iets mis. Probeer opnieuw.</p>
     </form>
   </div>
 </section>
@@ -338,17 +339,33 @@ function renderEvents() {
   }).join('');
 }
 
-function submitForm(e) {
-  e.preventDefault();
-  const naam = e.target.querySelector('input[type="text"]').value;
-  const email = e.target.querySelector('input[type="email"]').value;
-  const bericht = e.target.querySelector('textarea').value;
-  
-  const mailto = `mailto:leefstraatmaurice@gmail.com?subject=Bericht via Leefstraat MV&body=Van: ${naam}%0AEmail: ${email}%0A%0A${bericht}`;
-  window.location.href = mailto;
-  
-  document.getElementById('form-thanks').style.display = 'block';
-}
+// ── FORMSPREE CONTACT FORM ──
+const form = document.getElementById('contact-form');
+if (form) {
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Versturen…';
+    btn.disabled = true;
+    try {
+      const res = await fetch('https://formspree.io/f/JOUW_FORM_ID', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.reset();
+        document.getElementById('form-thanks').style.display = 'block';
+        document.getElementById('form-error').style.display = 'none';
+      } else {
+        document.getElementById('form-error').style.display = 'block';
+      }
+    } catch(err) {
+      document.getElementById('form-error').style.display = 'block';
+    }
+    btn.textContent = 'Versturen →';
+    btn.disabled = false;
+  });
 }
 
 renderEvents();
