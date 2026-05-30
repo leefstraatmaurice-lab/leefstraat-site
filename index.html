@@ -301,8 +301,7 @@
       <p>Wil je meehelpen, een activiteit voorstellen of gewoon meer info? Stuur ons een berichtje — we horen graag van onze buren.</p>
       <p style="margin-top:20px;font-size:14px;opacity:0.5;">Leefstraat Maurice Verdoncklaan · Gentbrugge · 2026</p>
     </div>
-    <form class="contact-form" id="contact-form" name="contact" netlify netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="contact">
+    <form class="contact-form" id="contact-form">
       <input type="text" name="naam" placeholder="Jouw naam" required>
       <input type="email" name="email" placeholder="E-mailadres" required>
       <textarea name="bericht" placeholder="Jouw bericht…" rows="4" required></textarea>
@@ -361,32 +360,20 @@ function renderEvents() {
   }).join('');
 }
 
-// ── NETLIFY FORMS ──
+// ── CONTACT FORM ──
 const form = document.getElementById('contact-form');
 if (form) {
-  form.addEventListener('submit', async function(e) {
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
-    const btn = document.getElementById('submit-btn');
-    btn.textContent = 'Versturen…';
-    btn.disabled = true;
-    try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(form)).toString()
-      });
-      if (res.ok) {
-        form.reset();
-        document.getElementById('form-thanks').style.display = 'block';
-        document.getElementById('form-error').style.display = 'none';
-      } else {
-        document.getElementById('form-error').style.display = 'block';
-      }
-    } catch(err) {
-      document.getElementById('form-error').style.display = 'block';
-    }
-    btn.textContent = 'Versturen →';
-    btn.disabled = false;
+    const naam = form.querySelector('input[name="naam"]').value;
+    const email = form.querySelector('input[name="email"]').value;
+    const bericht = form.querySelector('textarea[name="bericht"]').value;
+    const mailto = 'mailto:leefstraatmaurice@gmail.com'
+      + '?subject=' + encodeURIComponent('Bericht via Leefstraat MV')
+      + '&body=' + encodeURIComponent('Van: ' + naam + '\nEmail: ' + email + '\n\n' + bericht);
+    window.location.href = mailto;
+    form.reset();
+    document.getElementById('form-thanks').style.display = 'block';
   });
 }
 
