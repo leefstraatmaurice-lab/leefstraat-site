@@ -319,22 +319,35 @@ const uploadWidget = cloudinary.createUploadWidget({
 
 document.getElementById('upload-btn').addEventListener('click', () => uploadWidget.open());
 
-// ── FOTO OPSLAG (localStorage) ──
-function getPhotos() {
-  return JSON.parse(localStorage.getItem('lf-cld-photos') || '[]');
-}
-function savePhoto(url, publicId) {
-  const photos = getPhotos();
-  photos.unshift({ url, publicId, ts: Date.now() });
-  localStorage.setItem('lf-cld-photos', JSON.stringify(photos));
-}
-
-// ── GRID RENDEREN ──
+// ── CLOUDINARY FOTO OPHALEN ──
 let allPhotos = [];
 let lbIndex = 0;
+let nextCursor = null;
+let loading = false;
+
+async function fetchPhotos(reset = false) {
+  if (loading) return;
+  loading = true;
+  if (reset) { allPhotos = []; nextCursor = null; }
+  try {
+    let url = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/${UPLOAD_PRESET}.json`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Fetch failed');
+    const data = await res.json();
+    const newPhotos = (data.resources || []).map(r => ({
+      url: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto,f_auto/${r.public_id}.jpg`,
+      publicId: r.public_id
+    }));
+    allPhotos = [...newPhotos];
+    renderGrid();
+  } catch(e) {
+    console.error('Cloudinary fetch error:', e);
+    renderGrid();
+  }
+  loading = false;
+}
 
 function renderGrid() {
-  allPhotos = getPhotos();
   const grid = document.getElementById('photo-grid');
   if (allPhotos.length === 0) {
     grid.innerHTML = `<div class="empty-grid" style="column-span:all">
@@ -351,15 +364,8 @@ function renderGrid() {
 }
 
 function addPhotoToGrid(url, publicId) {
-  allPhotos = getPhotos();
-  const grid = document.getElementById('photo-grid');
-  const emptyEl = grid.querySelector('.empty-grid');
-  if (emptyEl) grid.innerHTML = '';
-  const div = document.createElement('div');
-  div.className = 'photo-item';
-  div.onclick = () => openLightbox(0);
-  div.innerHTML = `<img src="${url}" alt="Buurtfoto" loading="lazy"><div class="photo-overlay"><div class="photo-caption">Bekijk foto</div></div>`;
-  grid.insertBefore(div, grid.firstChild);
+  // Herlaad alle foto's van Cloudinary na upload
+  setTimeout(() => fetchPhotos(true), 1500);
 }
 
 // ── LIGHTBOX ──
@@ -440,7 +446,7 @@ function closeMenu() {
 }
 
 // ── INIT ──
-renderGrid();
+fetchPhotos();
 renderAlbums();
 </script>
 </body>
