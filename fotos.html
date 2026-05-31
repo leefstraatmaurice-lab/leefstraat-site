@@ -312,7 +312,10 @@ const uploadWidget = cloudinary.createUploadWidget({
   if (!error && result && result.event === 'success') {
     const url = result.info.secure_url;
     const publicId = result.info.public_id;
-    savePhoto(url, publicId);
+    // Sla op in localStorage als backup
+    const photos = JSON.parse(localStorage.getItem('lf-cld-photos') || '[]');
+    photos.unshift({ url, publicId, ts: Date.now() });
+    localStorage.setItem('lf-cld-photos', JSON.stringify(photos));
     addPhotoToGrid(url, publicId);
   }
 });
@@ -330,18 +333,23 @@ async function fetchPhotos(reset = false) {
   loading = true;
   if (reset) { allPhotos = []; nextCursor = null; }
   try {
-    let url = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/${UPLOAD_PRESET}.json`;
+    // Gebruik Cloudinary search API via tag
+    const url = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/leefstraat.json?max_results=100`;
     const res = await fetch(url);
-    if (!res.ok) throw new Error('Fetch failed');
-    const data = await res.json();
-    const newPhotos = (data.resources || []).map(r => ({
-      url: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto,f_auto/${r.public_id}.jpg`,
-      publicId: r.public_id
-    }));
-    allPhotos = [...newPhotos];
+    if (res.ok) {
+      const data = await res.json();
+      allPhotos = (data.resources || []).reverse().map(r => ({
+        url: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto,f_auto,w_800/${r.public_id}.jpg`,
+        publicId: r.public_id
+      }));
+    } else {
+      // Fallback: gebruik localStorage
+      allPhotos = JSON.parse(localStorage.getItem('lf-cld-photos') || '[]');
+    }
     renderGrid();
   } catch(e) {
-    console.error('Cloudinary fetch error:', e);
+    // Fallback: gebruik localStorage
+    allPhotos = JSON.parse(localStorage.getItem('lf-cld-photos') || '[]');
     renderGrid();
   }
   loading = false;
