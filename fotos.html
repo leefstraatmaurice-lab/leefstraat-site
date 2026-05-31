@@ -18,11 +18,11 @@
   html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
 
+  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 24px;
-    background: rgba(250,247,242,0.88); backdrop-filter: blur(12px);
+    padding: 18px 48px; background: rgba(250,247,242,0.88); backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(45,80,22,0.1);
   }
   .nav-logo { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--green-deep); text-decoration: none; }
@@ -30,57 +30,7 @@
   .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 14px; font-weight: 500; transition: color 0.2s; }
   .nav-links a:hover, .nav-links a.active { color: var(--green-deep); }
 
-  .page-header { padding: 160px 48px 80px; background: var(--sand); position: relative; overflow: hidden; }
-  .header-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 80% at 90% 50%, rgba(139,184,122,0.2) 0%, transparent 70%); pointer-events: none; }
-  .page-tag { display: inline-block; background: var(--amber-light); color: var(--amber); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; margin-bottom: 20px; }
-  .page-title { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 68px); font-weight: 900; line-height: 1; letter-spacing: -0.03em; color: var(--green-deep); position: relative; }
-  .page-title em { font-style: italic; color: var(--amber); }
-  .page-intro { margin-top: 20px; max-width: 560px; font-size: 16px; color: var(--text-mid); line-height: 1.7; font-weight: 300; position: relative; }
-  .header-btn {
-    display: inline-flex; align-items: center; gap: 10px; margin-top: 28px;
-    background: var(--fb); color: white; padding: 14px 28px; border-radius: 999px;
-    text-decoration: none; font-size: 15px; font-weight: 500; position: relative;
-    transition: opacity 0.2s;
-  }
-  .header-btn:hover { opacity: 0.88; }
-  .header-btn svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
-
-  main { padding: 64px 48px 100px; max-width: 860px; margin: 0 auto; }
-
-  .info-card {
-    background: var(--warm-white); border-radius: var(--radius);
-    padding: 36px; border: 1px solid rgba(0,0,0,0.06); margin-bottom: 24px;
-  }
-  .info-card-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 10px; }
-  .info-card-text { font-size: 15px; color: var(--text-mid); line-height: 1.7; }
-  .fb-link-big {
-    display: flex; align-items: center; justify-content: space-between; gap: 20px;
-    background: var(--fb); border-radius: var(--radius); padding: 28px 32px;
-    text-decoration: none; transition: opacity 0.2s; margin-bottom: 24px;
-  }
-  .fb-link-big:hover { opacity: 0.92; }
-  .fb-link-big-left { display: flex; align-items: center; gap: 16px; }
-  .fb-link-big svg { width: 36px; height: 36px; fill: white; flex-shrink: 0; }
-  .fb-link-big-title { color: white; font-size: 17px; font-weight: 500; }
-  .fb-link-big-sub { color: rgba(255,255,255,0.7); font-size: 13px; margin-top: 3px; }
-  .fb-link-big-arrow { color: white; font-size: 22px; opacity: 0.7; }
-
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .step { background: var(--green-pale); border-radius: var(--radius); padding: 24px; text-align: center; }
-  .step-icon { font-size: 28px; margin-bottom: 10px; }
-  .step-title { font-weight: 500; color: var(--green-deep); font-size: 14px; margin-bottom: 4px; }
-  .step-text { font-size: 13px; color: var(--text-light); line-height: 1.5; }
-
-  footer { background: var(--green-deep); }
-  .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 32px 48px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-  .footer-logo { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: white; }
-  .footer-social { display: flex; gap: 12px; }
-  .social-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: background 0.2s; text-decoration: none; }
-  .social-icon:hover { background: rgba(255,255,255,0.22); }
-  .social-icon svg { width: 18px; height: 18px; fill: white; }
-  .footer-copy { text-align: center; padding: 20px 48px; color: rgba(255,255,255,0.3); font-size: 12px; }
-
-
+  /* HAMBURGER */
   .hamburger {
     display: none; background: none; border: none;
     cursor: pointer; padding: 8px; flex-direction: column;
@@ -107,26 +57,137 @@
   .mobile-menu a {
     text-decoration: none; color: var(--text-dark);
     font-size: 17px; font-weight: 500; padding: 12px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    transition: color 0.2s;
+    border-bottom: 1px solid rgba(0,0,0,0.06); transition: color 0.2s;
   }
   .mobile-menu a:last-child { border-bottom: none; }
   .mobile-menu a:hover { color: var(--green-mid); }
 
+  /* PAGE HEADER */
+  .page-header { padding: 160px 48px 80px; background: var(--sand); position: relative; overflow: hidden; }
+  .header-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 80% at 90% 50%, rgba(139,184,122,0.2) 0%, transparent 70%); pointer-events: none; }
+  .page-tag { display: inline-block; background: var(--amber-light); color: var(--amber); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; margin-bottom: 20px; }
+  .page-title { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 68px); font-weight: 900; line-height: 1; letter-spacing: -0.03em; color: var(--green-deep); position: relative; }
+  .page-title em { font-style: italic; color: var(--amber); }
+  .page-intro { margin-top: 20px; max-width: 560px; font-size: 16px; color: var(--text-mid); line-height: 1.7; font-weight: 300; position: relative; }
+  .header-actions { display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap; position: relative; }
+
+  .btn-fb {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--fb); color: white; padding: 13px 24px; border-radius: 999px;
+    text-decoration: none; font-size: 14px; font-weight: 500; transition: opacity 0.2s;
+  }
+  .btn-fb:hover { opacity: 0.88; }
+  .btn-fb svg { width: 18px; height: 18px; fill: white; }
+
+  .btn-upload-cld {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-mid); color: white; padding: 13px 24px; border-radius: 999px;
+    font-size: 14px; font-weight: 500; cursor: pointer; border: none;
+    font-family: 'DM Sans', sans-serif; transition: background 0.2s;
+  }
+  .btn-upload-cld:hover { background: var(--green-deep); }
+
+  /* MASONRY GRID */
+  main { padding: 48px 48px 100px; }
+
+  .upload-hint {
+    background: var(--green-pale); border-radius: var(--radius);
+    padding: 20px 24px; margin-bottom: 32px;
+    display: flex; align-items: center; gap: 14px;
+    font-size: 14px; color: var(--green-deep);
+  }
+  .upload-hint-icon { font-size: 24px; flex-shrink: 0; }
+
+  /* Facebook albums */
+  .albums-section { margin-bottom: 48px; }
+  .albums-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 20px; }
+  .fb-link-big {
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    background: var(--fb); border-radius: var(--radius); padding: 22px 28px;
+    text-decoration: none; transition: opacity 0.2s; margin-bottom: 12px;
+  }
+  .fb-link-big:hover { opacity: 0.92; }
+  .fb-link-big-left { display: flex; align-items: center; gap: 16px; }
+  .fb-link-big svg { width: 32px; height: 32px; fill: white; flex-shrink: 0; }
+  .fb-link-big-title { color: white; font-size: 16px; font-weight: 500; }
+  .fb-link-big-sub { color: rgba(255,255,255,0.7); font-size: 13px; margin-top: 3px; }
+  .fb-link-big-arrow { color: white; font-size: 20px; opacity: 0.7; }
+
+  /* FOTO GRID */
+  .fotos-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 20px; }
+  .masonry { columns: 4; column-gap: 14px; }
+  .photo-item {
+    break-inside: avoid; margin-bottom: 14px;
+    border-radius: var(--radius); overflow: hidden;
+    position: relative; cursor: pointer; background: var(--green-pale);
+  }
+  .photo-item img { width: 100%; display: block; transition: transform 0.4s ease; }
+  .photo-item:hover img { transform: scale(1.04); }
+  .photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(45,80,22,0.6) 0%, transparent 50%);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: flex-end; padding: 14px;
+  }
+  .photo-item:hover .photo-overlay { opacity: 1; }
+  .photo-caption { color: white; font-size: 12px; font-weight: 500; }
+
+  .empty-grid {
+    text-align: center; padding: 60px 20px;
+    color: var(--text-light); font-size: 15px;
+  }
+  .empty-grid-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
+
+  /* LIGHTBOX */
+  #lightbox {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: rgba(26,26,24,0.92); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+  }
+  #lightbox.open { display: flex; }
+  #lightbox img { max-width: 90vw; max-height: 85vh; border-radius: var(--radius); object-fit: contain; }
+  .lb-close {
+    position: absolute; top: 24px; right: 32px;
+    background: rgba(255,255,255,0.1); border: none; color: white;
+    font-size: 24px; cursor: pointer; width: 44px; height: 44px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .lb-close:hover { background: rgba(255,255,255,0.2); }
+  .lb-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.1); border: none; color: white;
+    font-size: 22px; cursor: pointer; width: 52px; height: 52px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .lb-nav:hover { background: rgba(255,255,255,0.2); }
+  .lb-prev { left: 24px; }
+  .lb-next { right: 24px; }
+
+  /* FOOTER */
+  footer { background: var(--green-deep); }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 32px 48px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: white; }
+  .footer-social { display: flex; gap: 12px; }
+  .social-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: background 0.2s; text-decoration: none; }
+  .social-icon:hover { background: rgba(255,255,255,0.22); }
+  .social-icon svg { width: 18px; height: 18px; fill: white; }
+  .footer-copy { text-align: center; padding: 20px 48px; color: rgba(255,255,255,0.3); font-size: 12px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) { .masonry { columns: 3; } }
   @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
-    nav { padding: 14px 20px; }
-  }
-
-  @media (max-width: 768px) {
-    nav { padding: 16px 20px; }
     .page-header { padding: 120px 20px 60px; }
-    main { padding: 40px 20px 80px; }
-    .steps { grid-template-columns: 1fr; }
+    main { padding: 32px 20px 80px; }
+    .masonry { columns: 2; }
     .footer-inner { padding: 24px 20px 16px; }
     .footer-copy { padding: 16px 20px; }
   }
+  @media (max-width: 480px) { .masonry { columns: 1; } }
 </style>
 </head>
 <body>
@@ -140,14 +201,14 @@
     <li><a href="regels.html">Regels</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu openen" onclick="toggleMenu()">
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
   <a href="index.html">Home</a>
   <a href="index.html#kalender">Activiteiten</a>
-  <a href="fotos.html" onclick="closeMenu()">Foto's</a>
+  <a href="fotos.html">Foto's</a>
   <a href="regels.html">Regels</a>
   <a href="index.html#contact">Contact</a>
 </div>
@@ -156,112 +217,230 @@
   <div class="header-bg"></div>
   <div class="page-tag">Herinneringen</div>
   <h1 class="page-title">Foto's van<br>de <em>zomer</em></h1>
-  <p class="page-intro">Alle buurtmomenten bewaren we op Facebook. Klik hieronder om onze fotoalbums te bekijken.</p>
-  <a href="https://www.facebook.com/groups/1399586126957590" target="_blank" rel="noopener" class="header-btn">
-    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-    Bekijk de Facebook-groep
-  </a>
+  <p class="page-intro">Upload je eigen foto's of bekijk de albums op Facebook. Samen bewaren we de mooiste buurtmomenten!</p>
+  <div class="header-actions">
+    <button class="btn-upload-cld" id="upload-btn">📷 Foto's uploaden</button>
+    <a href="https://www.facebook.com/groups/1399586126957590" target="_blank" rel="noopener" class="btn-fb">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      Facebook-groep
+    </a>
+  </div>
 </div>
 
 <main>
-
-  <!-- VASTE ALBUMS -->
-  <div id="albums-grid" style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;"></div>
-
-  <div class="info-card" style="margin-bottom:24px;" id="geen-albums" style="display:none;">
-    <div class="info-card-title">Albums komen eraan</div>
-    <div class="info-card-text">Na elke activiteit verschijnt hier een link naar het fotoalbum op Facebook. Lid zijn van de groep? Dan zie je alle foto's rechtstreeks.</div>
+  <div class="upload-hint">
+    <div class="upload-hint-icon">💡</div>
+    <div>Klik op <strong>"Foto's uploaden"</strong> om je foto's te delen met de buurt. Ze verschijnen meteen in het grid hieronder!</div>
   </div>
 
-  <!-- HOE WERKT HET -->
-  <div class="steps">
-    <div class="step">
-      <div class="step-icon">📸</div>
-      <div class="step-title">Foto nemen</div>
-      <div class="step-text">Maak een foto tijdens een activiteit met je smartphone.</div>
-    </div>
-    <div class="step">
-      <div class="step-icon">📤</div>
-      <div class="step-title">Posten in de groep</div>
-      <div class="step-text">Upload je foto's in onze Facebook-groep — iedereen ziet ze meteen.</div>
-    </div>
-    <div class="step">
-      <div class="step-icon">❤️</div>
-      <div class="step-title">Samen genieten</div>
-      <div class="step-text">Like en reageer op de mooiste buurtmomenten.</div>
-    </div>
+  <!-- FACEBOOK ALBUMS -->
+  <div class="albums-section">
+    <div class="albums-title">📁 Facebook albums</div>
+    <div id="albums-grid"></div>
   </div>
 
+  <!-- CLOUDINARY FOTO GRID -->
+  <div class="fotos-title">📸 Buurtfoto's</div>
+  <div class="masonry" id="photo-grid">
+    <div class="empty-grid" style="column-span:all">
+      <div class="empty-grid-icon">📷</div>
+      <div>Nog geen foto's — wees de eerste!</div>
+    </div>
+  </div>
 </main>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-nav lb-prev" onclick="lbNav(-1)">‹</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lb-nav lb-next" onclick="lbNav(1)">›</button>
+</div>
 
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">Leefstraat Maurice Verdoncklaan</div>
     <div class="footer-social">
       <a href="https://www.facebook.com/groups/1399586126957590" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
-        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="https://wa.me/" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       </a>
     </div>
   </div>
   <div class="footer-copy">&copy; 2026 Leefstraat Maurice Verdoncklaan · Gentbrugge · Met ❤️ door de buurt</div>
 </footer>
 
+<!-- Cloudinary Upload Widget -->
+<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+
 <script>
+// ── CLOUDINARY CONFIG ──
+const CLOUD_NAME = 'dgqpatpiz';
+const UPLOAD_PRESET = 'leefstraat';
+
+// Upload widget
+const uploadWidget = cloudinary.createUploadWidget({
+  cloudName: CLOUD_NAME,
+  uploadPreset: UPLOAD_PRESET,
+  sources: ['local', 'camera'],
+  multiple: true,
+  maxFiles: 20,
+  language: 'nl',
+  text: {
+    nl: {
+      or: 'of',
+      back: 'Terug',
+      advanced: 'Geavanceerd',
+      close: 'Sluiten',
+      no_results: 'Geen resultaten',
+      search_placeholder: 'Zoeken...',
+      about_uw: 'Over de widget',
+      menu: { files: 'Mijn bestanden', web: 'Webadres', camera: 'Camera' },
+      selection_counter: { file: 'bestand', files: 'bestanden' },
+      actions: { upload: 'Uploaden', clear_all: 'Alles wissen', log_out: 'Uitloggen' },
+      notifications: { general_error: 'Er is een fout opgetreden.', general_prompt: 'Weet je het zeker?', limit_reached: 'Maximaal aantal bestanden bereikt.' },
+      queue: { title: 'Upload wachtrij', title_uploading_with_counter: 'Bezig met uploaden ({{num}})', title_processing_with_counter: 'Bezig met verwerken ({{num}})', title_uploading: 'Bestanden uploaden', upload_more: 'Meer uploaden', done: 'Klaar', mini_title: 'Geüpload', mini_title_uploading: 'Bezig...', statuses: { uploading: 'Bezig met uploaden...', processing: 'Bezig met verwerken...', timeout: 'Time-out', error: 'Fout', uploaded: 'Geüpload', aborted: 'Geannuleerd' } }
+    }
+  },
+  styles: {
+    palette: { window: '#FFFFFF', windowBorder: '#E8F0E2', tabIcon: '#4A7C2F', menuIcons: '#4A7C2F', textDark: '#1A1A18', textLight: '#8A8A7A', link: '#4A7C2F', action: '#4A7C2F', inactiveTabIcon: '#8A8A7A', error: '#C0392B', inProgress: '#4A7C2F', complete: '#2D5016', sourceBg: '#FAF7F2' },
+    fonts: { default: { active: true } }
+  }
+}, (error, result) => {
+  if (!error && result && result.event === 'success') {
+    const url = result.info.secure_url;
+    const publicId = result.info.public_id;
+    savePhoto(url, publicId);
+    addPhotoToGrid(url, publicId);
+  }
+});
+
+document.getElementById('upload-btn').addEventListener('click', () => uploadWidget.open());
+
+// ── FOTO OPSLAG (localStorage) ──
+function getPhotos() {
+  return JSON.parse(localStorage.getItem('lf-cld-photos') || '[]');
+}
+function savePhoto(url, publicId) {
+  const photos = getPhotos();
+  photos.unshift({ url, publicId, ts: Date.now() });
+  localStorage.setItem('lf-cld-photos', JSON.stringify(photos));
+}
+
+// ── GRID RENDEREN ──
+let allPhotos = [];
+let lbIndex = 0;
+
+function renderGrid() {
+  allPhotos = getPhotos();
+  const grid = document.getElementById('photo-grid');
+  if (allPhotos.length === 0) {
+    grid.innerHTML = `<div class="empty-grid" style="column-span:all">
+      <div class="empty-grid-icon">📷</div>
+      <div>Nog geen foto's — wees de eerste!</div>
+    </div>`;
+    return;
+  }
+  grid.innerHTML = allPhotos.map((p, i) => `
+    <div class="photo-item" onclick="openLightbox(${i})">
+      <img src="${p.url}" alt="Buurtfoto ${i+1}" loading="lazy">
+      <div class="photo-overlay"><div class="photo-caption">Bekijk foto</div></div>
+    </div>`).join('');
+}
+
+function addPhotoToGrid(url, publicId) {
+  allPhotos = getPhotos();
+  const grid = document.getElementById('photo-grid');
+  const emptyEl = grid.querySelector('.empty-grid');
+  if (emptyEl) grid.innerHTML = '';
+  const div = document.createElement('div');
+  div.className = 'photo-item';
+  div.onclick = () => openLightbox(0);
+  div.innerHTML = `<img src="${url}" alt="Buurtfoto" loading="lazy"><div class="photo-overlay"><div class="photo-caption">Bekijk foto</div></div>`;
+  grid.insertBefore(div, grid.firstChild);
+}
+
+// ── LIGHTBOX ──
+function openLightbox(idx) {
+  lbIndex = idx;
+  document.getElementById('lb-img').src = allPhotos[idx].url;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+function lbNav(dir) {
+  lbIndex = (lbIndex + dir + allPhotos.length) % allPhotos.length;
+  document.getElementById('lb-img').src = allPhotos[lbIndex].url;
+}
+document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target === this) closeLightbox(); });
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lbNav(-1);
+  if (e.key === 'ArrowRight') lbNav(1);
+});
+
+// ── FACEBOOK ALBUMS ──
 const MONTHS = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
-const DEFAULT = [
+const DEFAULT_EVENTS = [
   { date: '2026-06-05', name: 'Opening met hot dogs', note: '', fb: '' },
   { date: '2026-07-11', name: 'Spelletjesavond afterwork', note: '', fb: '' },
   { date: '2026-08-16', name: 'Koffie & taart', note: '', fb: '' },
   { date: '2026-08-23', name: 'BBQ', note: '', fb: '' }
 ];
-
-// Vast album dat altijd getoond wordt
 const VASTE_ALBUMS = [
   { name: 'Afscheidsdrink', date: '13 jul 2022', fb: 'https://www.facebook.com/media/set/?set=oa.1089925041954156&type=3' }
 ];
-
-function fmtDate(d) {
-  const p = d.split('-');
-  return `${parseInt(p[2])} ${MONTHS[parseInt(p[1])-1]} ${p[0]}`;
-}
+const fbIcon = `<svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:white;flex-shrink:0"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`;
 
 function renderAlbums() {
-  const evts = JSON.parse(localStorage.getItem('lf-events') || JSON.stringify(DEFAULT))
+  const evts = JSON.parse(localStorage.getItem('lf-events') || JSON.stringify(DEFAULT_EVENTS))
     .filter(e => e.fb && e.fb.trim() !== '')
     .sort((a,b) => b.date.localeCompare(a.date));
-
   const grid = document.getElementById('albums-grid');
-  const geenAlbums = document.getElementById('geen-albums');
-  const fbIcon = `<svg viewBox="0 0 24 24" style="width:32px;height:32px;fill:white;flex-shrink:0"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`;
 
-  // Toon vaste albums eerst
-  let html = VASTE_ALBUMS.map(a => `
+  const vasteHtml = VASTE_ALBUMS.map(a => `
     <a href="${a.fb}" target="_blank" rel="noopener" class="fb-link-big">
       <div class="fb-link-big-left">${fbIcon}
         <div>
           <div class="fb-link-big-title">📸 ${a.name}</div>
-          <div class="fb-link-big-sub">${a.date} · Bekijk het fotoalbum op Facebook</div>
+          <div class="fb-link-big-sub">${a.date} · Bekijk op Facebook</div>
         </div>
       </div>
       <div class="fb-link-big-arrow">→</div>
     </a>`).join('');
 
-  // Voeg activiteiten-albums toe
-  html += evts.map(e => `
+  const evtHtml = evts.map(e => {
+    const p = e.date.split('-');
+    const datum = `${parseInt(p[2])} ${MONTHS[parseInt(p[1])-1]} ${p[0]}`;
+    return `
     <a href="${e.fb}" target="_blank" rel="noopener" class="fb-link-big">
       <div class="fb-link-big-left">${fbIcon}
         <div>
           <div class="fb-link-big-title">📸 ${e.name}</div>
-          <div class="fb-link-big-sub">${fmtDate(e.date)} · Bekijk het fotoalbum op Facebook</div>
+          <div class="fb-link-big-sub">${datum} · Bekijk op Facebook</div>
         </div>
       </div>
       <div class="fb-link-big-arrow">→</div>
-    </a>`).join('');
+    </a>`;
+  }).join('');
 
-  grid.innerHTML = html;
-  geenAlbums.style.display = evts.length === 0 ? 'block' : 'none';
+  grid.innerHTML = vasteHtml + evtHtml;
 }
 
+// ── HAMBURGER ──
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+// ── INIT ──
+renderGrid();
 renderAlbums();
 </script>
 </body>
