@@ -334,7 +334,7 @@ async function fetchPhotos(reset = false) {
   if (reset) { allPhotos = []; nextCursor = null; }
   try {
     // Gebruik Cloudinary search API via tag
-    const url = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/leefstraat.json?max_results=100`;
+    const url = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/leefstraat.json?max_results=100&_=${Date.now()};
     const res = await fetch(url);
     if (res.ok) {
       const data = await res.json();
