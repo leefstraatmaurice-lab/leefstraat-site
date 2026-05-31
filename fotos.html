@@ -230,7 +230,7 @@
 <main>
   <div class="upload-hint">
     <div class="upload-hint-icon">💡</div>
-    <div>Klik op <strong>"Foto's uploaden"</strong> om je foto's te delen met de buurt. Ze verschijnen meteen in het grid hieronder na een paar minuutjes!</div>
+    <div>Klik op <strong>"Foto's uploaden"</strong> om je foto's te delen met de buurt. Ze verschijnen meteen in het grid hieronder!</div>
   </div>
 
   <!-- FACEBOOK ALBUMS -->
@@ -272,6 +272,7 @@
   <div class="footer-copy">&copy; 2026 Leefstraat Maurice Verdoncklaan · Gentbrugge · Met ❤️ door de buurt</div>
 </footer>
 
+<script src="data.js"></script>
 <!-- Cloudinary Upload Widget -->
 <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
 
@@ -397,19 +398,11 @@ document.addEventListener('keydown', e => {
 
 // ── FACEBOOK ALBUMS ──
 const MONTHS = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
-const DEFAULT_EVENTS = [
-  { date: '2026-06-05', name: 'Opening met hot dogs', note: '', fb: '' },
-  { date: '2026-07-11', name: 'Spelletjesavond afterwork', note: '', fb: '' },
-  { date: '2026-08-16', name: 'Koffie & taart', note: '', fb: '' },
-  { date: '2026-08-23', name: 'BBQ', note: '', fb: '' }
-];
-const VASTE_ALBUMS = [
-  { name: 'Afscheidsdrink', date: '13 jul 2022', fb: 'https://www.facebook.com/media/set/?set=oa.1089925041954156&type=3' }
-];
+// ACTIVITEITEN en VASTE_ALBUMS komen uit data.js
 const fbIcon = `<svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:white;flex-shrink:0"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`;
 
 function renderAlbums() {
-  const evts = JSON.parse(localStorage.getItem('lf-events') || JSON.stringify(DEFAULT_EVENTS))
+  const evts = [...ACTIVITEITEN]
     .filter(e => e.fb && e.fb.trim() !== '')
     .sort((a,b) => b.date.localeCompare(a.date));
   const grid = document.getElementById('albums-grid');
