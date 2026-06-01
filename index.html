@@ -91,7 +91,7 @@
     );
   }
   .hero-tag {
-    display: inline-block; background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(8px);
+    display: iine-block; background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(8px);
     font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
     text-transform: uppercase; padding: 6px 14px; border-radius: 999px; margin-bottom: 28px;
   }
@@ -107,7 +107,7 @@
     max-width: 480px; line-height: 1.6; font-weight: 300;
   }
   .hero-cta {
-    display: inline-block; margin-top: 32px;
+    display: iine-block; margin-top: 32px;
     background: var(--green-mid); color: white;
     padding: 14px 28px; border-radius: 999px;
     text-decoration: none; font-size: 15px; font-weight: 500;
@@ -336,7 +336,7 @@
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'nl',
-    includedLanguages: 'nl,fr,en,pl,bg,tr',
+    includedLanguages: 'nl,fr,en,sq,pl,bg,tr',
     layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
     autoDisplay: false
   }, 'google_translate_element');
@@ -345,7 +345,7 @@ function googleTranslateElementInit() {
     const combo = document.querySelector('.goog-te-combo');
     if (combo) {
       const opt = combo.querySelector('option[value=""]');
-      if (opt) opt.textContent = '🌐';
+      if (opt) opt.textContent = '🌐 Taal';
     }
   }, 800);
 }
