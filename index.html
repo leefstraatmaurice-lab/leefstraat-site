@@ -337,7 +337,7 @@
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'nl',
-    includedLanguages: 'nl,fr,en,sq,pl,bg,tr',
+    includedLanguages: 'nl,fr,en,pl,bg,tr',
     layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
     autoDisplay: false
   }, 'google_translate_element');
@@ -350,26 +350,7 @@ function googleTranslateElementInit() {
     }
   }, 800);
 
-  // MutationObserver: verberg Google branding zodra die verschijnt
-  const observer = new MutationObserver(function() {
-    const gadget = document.querySelector('.goog-te-gadget');
-    if (gadget) {
-      // Verberg alle directe children behalve de select
-      Array.from(gadget.childNodes).forEach(node => {
-        if (node.nodeType === 1 && node.tagName !== 'SELECT' && !node.classList.contains('goog-te-combo')) {
-          node.style.cssText = 'display:none!important';
-        }
-        if (node.nodeType === 3) {
-          // Tekstnodes verbergen via wrapping
-          const span = document.createElement('span');
-          span.style.display = 'none';
-          node.parentNode.insertBefore(span, node);
-          span.appendChild(node);
-        }
-      });
-    }
-  });
-  observer.observe(document.body, { childList: true, subtree: true });
+
 }
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
