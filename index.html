@@ -45,6 +45,17 @@
   }
   .nav-links a:hover { color: var(--green-deep); }
 
+  /* TRANSLATE KNOP */
+  .translate-btn {
+    background: none; border: 1.5px solid rgba(45,80,22,0.2);
+    border-radius: 999px; padding: 6px 12px;
+    cursor: pointer; font-size: 13px; color: var(--green-mid);
+    font-family: 'DM Sans', sans-serif; font-weight: 500;
+    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  .translate-btn:hover { background: var(--green-pale); border-color: var(--green-mid); }
+  #google_translate_element { position: absolute; opacity: 0; pointer-events: none; }
+
   /* HERO */
   #hero {
     min-height: 100vh; display: flex; flex-direction: column;
@@ -212,6 +223,7 @@
     .nav-links { display: none; }
     .hamburger { display: flex; }
     nav { padding: 14px 20px; }
+    .translate-btn span { display: none; }
   }
 
   @media (max-width: 768px) {
@@ -235,9 +247,14 @@
     <li><a href="regels.html">Regels</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu openen" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="translate-btn" onclick="document.querySelector('.goog-te-combo') && document.querySelector('.goog-te-combo').focus()" aria-label="Vertaal pagina">
+      🌐 <span>Taal</span>
+    </button>
+    <button class="hamburger" id="hamburger" aria-label="Menu openen" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
   <a href="#hero" onclick="closeMenu()">Home</a>
@@ -246,6 +263,8 @@
   <a href="regels.html" onclick="closeMenu()">Regels</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
 </div>
+
+<div id="google_translate_element" style="position:absolute;opacity:0;pointer-events:none;"></div>
 
 <section id="hero">
   <div class="hero-photo"></div>
@@ -298,25 +317,24 @@
       </a>
     </div>
   </div>
-<div style="text-align:center; padding: 12px 48px 0;">
-  <div id="google_translate_element"></div>
-</div>
+  <div class="footer-copy">
+    &copy; 2026 Leefstraat Maurice Verdoncklaan · Gentbrugge · Met ❤️ door de buurt
+    <a href="admin.html" style="margin-left:16px;opacity:0.2;color:inherit;text-decoration:none;font-size:11px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='0.2'" title="Beheer">🔒</a>
+  </div>
+</footer>
+
+<script src="data.js"></script>
 <script>
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'nl',
-    includedLanguages: 'en,fr,de,ar,tr,pl,ro',
+    includedLanguages: 'nl,en,fr,de,ar,tr,pl,ro,bg',
     layout: google.translate.TranslateElement.InlineLayout.SIMPLE
   }, 'google_translate_element');
 }
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <div class="footer-copy">
-    &copy; 2026 Leefstraat Maurice Verdoncklaan · Gentbrugge · Met ❤️ door de buurt
-  </div>
-</footer>
 
-<script src="data.js"></script>
 <script>
 const MONTHS = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
 
