@@ -348,6 +348,10 @@ function googleTranslateElementInit() {
     if (combo) {
       const opt = combo.querySelector('option[value=""]');
       if (opt) opt.textContent = '🌐 Taal';
+     }
+     // Verberg "Mogelijk gemaakt door" tekst
+    document.querySelectorAll('.goog-te-gadget span').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.goog-logo-link').forEach(el => el.style.display = 'none');
     }
   }, 800);
 }
