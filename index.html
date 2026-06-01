@@ -66,6 +66,7 @@
   .goog-te-combo:hover { background: var(--green-pale) !important; }
   .goog-te-banner-frame { display: none !important; }
   body { top: 0 !important; }
+  .goog-te-combo option[value=""] { display: none !important; }
 
   /* HERO */
   #hero {
@@ -335,10 +336,18 @@
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'nl',
-    includedLanguages: 'nl,en,fr,de,ar,tr,pl,ro,bg',
+    includedLanguages: 'nl,fr,en,pl,bg,tr',
     layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
     autoDisplay: false
   }, 'google_translate_element');
+  // Verander placeholder na laden
+  setTimeout(function() {
+    const combo = document.querySelector('.goog-te-combo');
+    if (combo) {
+      const opt = combo.querySelector('option[value=""]');
+      if (opt) opt.textContent = '🌐 Taal';
+    }
+  }, 800);
 }
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
