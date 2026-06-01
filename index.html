@@ -54,7 +54,7 @@
     transition: all 0.2s; display: flex; align-items: center; gap: 6px;
   }
   .translate-btn:hover { background: var(--green-pale); border-color: var(--green-mid); }
-  #google_translate_element { position: absolute; opacity: 0; pointer-events: none; }
+  #google_translate_element { position: fixed; top: -9999px; left: -9999px; z-index: 9999; }
 
   /* HERO */
   #hero {
@@ -264,7 +264,7 @@
   <a href="#contact" onclick="closeMenu()">Contact</a>
 </div>
 
-<div id="google_translate_element" style="position:absolute;opacity:0;pointer-events:none;"></div>
+<div id="google_translate_element"></div>
 
 <section id="hero">
   <div class="hero-photo"></div>
@@ -334,10 +334,31 @@ function googleTranslateElementInit() {
 }
 
 function triggerTranslate() {
-  const combo = document.querySelector('.goog-te-combo');
+  const el = document.getElementById('google_translate_element');
+  const combo = el ? el.querySelector('select') : null;
   if (combo) {
+    el.style.position = 'fixed';
+    el.style.top = '70px';
+    el.style.right = '20px';
+    el.style.left = 'auto';
+    el.style.zIndex = '9999';
+    el.style.background = 'white';
+    el.style.padding = '8px 12px';
+    el.style.borderRadius = '8px';
+    el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.15)';
     combo.focus();
     combo.click();
+    combo.addEventListener('change', () => {
+      setTimeout(() => {
+        el.style.top = '-9999px';
+      }, 500);
+    }, { once: true });
+    document.addEventListener('click', function hideIt(e) {
+      if (!el.contains(e.target)) {
+        el.style.top = '-9999px';
+        document.removeEventListener('click', hideIt);
+      }
+    });
   } else {
     setTimeout(triggerTranslate, 300);
   }
