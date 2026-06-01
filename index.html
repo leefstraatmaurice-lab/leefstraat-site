@@ -46,13 +46,14 @@
   .nav-links a:hover { color: var(--green-deep); }
 
   /* TRANSLATE WIDGET */
-  #google_translate_element { display: inline-flex; align-items: center; }
-  #google_translate_element .goog-te-gadget { font-size: 0 !important; }
-  #google_translate_element .goog-te-gadget > span { display: none !important; }
+  #google_translate_element { display: inline-block; }
+  .goog-te-gadget { font-size: 0 !important; line-height: 0 !important; }
+  .goog-te-gadget img { display: none !important; }
+  .goog-te-gadget > span > a { display: none !important; }
   .goog-te-combo {
     border: 1.5px solid rgba(45,80,22,0.2) !important;
     border-radius: 999px !important;
-    padding: 6px 12px !important;
+    padding: 7px 14px !important;
     font-size: 13px !important;
     color: var(--green-mid) !important;
     font-family: 'DM Sans', sans-serif !important;
@@ -60,14 +61,10 @@
     cursor: pointer !important;
     outline: none !important;
     background: var(--cream) !important;
-    transition: all 0.2s !important;
+    max-width: 120px !important;
   }
-  .goog-te-combo:hover {
-    background: var(--green-pale) !important;
-    border-color: var(--green-mid) !important;
-  }
+  .goog-te-combo:hover { background: var(--green-pale) !important; }
   .goog-te-banner-frame { display: none !important; }
-  .goog-logo-link { display: none !important; }
   body { top: 0 !important; }
 
   /* HERO */
@@ -339,7 +336,8 @@ function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'nl',
     includedLanguages: 'nl,en,fr,de,ar,tr,pl,ro,bg',
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+    autoDisplay: false
   }, 'google_translate_element');
 }
 </script>
