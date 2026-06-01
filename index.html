@@ -45,16 +45,29 @@
   }
   .nav-links a:hover { color: var(--green-deep); }
 
-  /* TRANSLATE KNOP */
-  .translate-btn {
-    background: none; border: 1.5px solid rgba(45,80,22,0.2);
-    border-radius: 999px; padding: 6px 12px;
-    cursor: pointer; font-size: 13px; color: var(--green-mid);
-    font-family: 'DM Sans', sans-serif; font-weight: 500;
-    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  /* TRANSLATE WIDGET */
+  #google_translate_element { display: inline-flex; align-items: center; }
+  #google_translate_element .goog-te-gadget { font-size: 0 !important; }
+  #google_translate_element .goog-te-gadget > span { display: none !important; }
+  .goog-te-combo {
+    border: 1.5px solid rgba(45,80,22,0.2) !important;
+    border-radius: 999px !important;
+    padding: 6px 12px !important;
+    font-size: 13px !important;
+    color: var(--green-mid) !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    outline: none !important;
+    background: var(--cream) !important;
+    transition: all 0.2s !important;
   }
-  .translate-btn:hover { background: var(--green-pale); border-color: var(--green-mid); }
-  #google_translate_element { position: fixed; top: -9999px; left: -9999px; z-index: 9999; }
+  .goog-te-combo:hover {
+    background: var(--green-pale) !important;
+    border-color: var(--green-mid) !important;
+  }
+  .goog-te-banner-frame, .skiptranslate { display: none !important; }
+  body { top: 0 !important; }
 
   /* HERO */
   #hero {
@@ -223,7 +236,6 @@
     .nav-links { display: none; }
     .hamburger { display: flex; }
     nav { padding: 14px 20px; }
-    .translate-btn span { display: none; }
   }
 
   @media (max-width: 768px) {
@@ -248,9 +260,7 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:12px;">
-    <button class="translate-btn" onclick="triggerTranslate()" aria-label="Vertaal pagina">
-      🌐 <span>Taal</span>
-    </button>
+    <div id="google_translate_element"></div>
     <button class="hamburger" id="hamburger" aria-label="Menu openen" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -264,7 +274,6 @@
   <a href="#contact" onclick="closeMenu()">Contact</a>
 </div>
 
-<div id="google_translate_element"></div>
 
 <section id="hero">
   <div class="hero-photo"></div>
@@ -331,37 +340,6 @@ function googleTranslateElementInit() {
     includedLanguages: 'nl,en,fr,de,ar,tr,pl,ro,bg',
     layout: google.translate.TranslateElement.InlineLayout.SIMPLE
   }, 'google_translate_element');
-}
-
-function triggerTranslate() {
-  const el = document.getElementById('google_translate_element');
-  const combo = el ? el.querySelector('select') : null;
-  if (combo) {
-    el.style.position = 'fixed';
-    el.style.top = '70px';
-    el.style.right = '20px';
-    el.style.left = 'auto';
-    el.style.zIndex = '9999';
-    el.style.background = 'white';
-    el.style.padding = '8px 12px';
-    el.style.borderRadius = '8px';
-    el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.15)';
-    combo.focus();
-    combo.click();
-    combo.addEventListener('change', () => {
-      setTimeout(() => {
-        el.style.top = '-9999px';
-      }, 500);
-    }, { once: true });
-    document.addEventListener('click', function hideIt(e) {
-      if (!el.contains(e.target)) {
-        el.style.top = '-9999px';
-        document.removeEventListener('click', hideIt);
-      }
-    });
-  } else {
-    setTimeout(triggerTranslate, 300);
-  }
 }
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
