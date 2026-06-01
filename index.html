@@ -248,7 +248,7 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:12px;">
-    <button class="translate-btn" onclick="document.querySelector('.goog-te-combo') && document.querySelector('.goog-te-combo').focus()" aria-label="Vertaal pagina">
+    <button class="translate-btn" onclick="triggerTranslate()" aria-label="Vertaal pagina">
       🌐 <span>Taal</span>
     </button>
     <button class="hamburger" id="hamburger" aria-label="Menu openen" onclick="toggleMenu()">
@@ -331,6 +331,16 @@ function googleTranslateElementInit() {
     includedLanguages: 'nl,en,fr,de,ar,tr,pl,ro,bg',
     layout: google.translate.TranslateElement.InlineLayout.SIMPLE
   }, 'google_translate_element');
+}
+
+function triggerTranslate() {
+  const combo = document.querySelector('.goog-te-combo');
+  if (combo) {
+    combo.focus();
+    combo.click();
+  } else {
+    setTimeout(triggerTranslate, 300);
+  }
 }
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
