@@ -30,27 +30,29 @@
   .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 14px; font-weight: 500; transition: color 0.2s; }
   .nav-links a:hover, .nav-links a.active { color: var(--green-deep); }
 
-  /* TRANSLATE KNOP */
-  .translate-btn {
-    background: none; border: 1.5px solid rgba(45,80,22,0.2);
-    border-radius: 999px; padding: 6px 12px;
-    cursor: pointer; font-size: 13px; color: var(--green-mid);
-    font-family: 'DM Sans', sans-serif; font-weight: 500;
-    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  /* TRANSLATE WIDGET */
+  #google_translate_element { display: inline-flex; align-items: center; min-width: 160px; }
+  .goog-te-gadget { display: inline-flex !important; align-items: center !important; }
+  .goog-te-gadget img { display: none !important; }
+  .goog-te-gadget > span { display: none !important; }
+  .goog-te-combo {
+    border: 1.5px solid rgba(45,80,22,0.2) !important;
+    border-radius: 999px !important;
+    padding: 7px 14px !important;
+    font-size: 13px !important;
+    color: var(--green-mid) !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    outline: none !important;
+    background: var(--cream) !important;
+    display: inline-block !important;
   }
-  .translate-btn:hover { background: var(--green-pale); border-color: var(--green-mid); }
-  #google_translate_element { position: absolute; opacity: 0; pointer-events: none; }
-
-  /* TRANSLATE KNOP */
-  .translate-btn {
-    background: none; border: 1.5px solid rgba(45,80,22,0.2);
-    border-radius: 999px; padding: 6px 12px;
-    cursor: pointer; font-size: 13px; color: var(--green-mid);
-    font-family: 'DM Sans', sans-serif; font-weight: 500;
-    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
-  }
-  .translate-btn:hover { background: var(--green-pale); border-color: var(--green-mid); }
-  #google_translate_element { position: absolute; opacity: 0; pointer-events: none; }
+  .goog-te-combo:hover { background: var(--green-pale) !important; }
+  .goog-te-banner-frame { display: none !important; }
+  .goog-logo-link { display: none !important; }
+  .goog-te-combo option[value=""] { display: none !important; }
+  body { top: 0 !important; }
 
   /* HAMBURGER */
   .hamburger {
@@ -203,7 +205,6 @@
     nav { padding: 14px 20px; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
-    .translate-btn span { display: none; }
     .page-header { padding: 120px 20px 60px; }
     main { padding: 32px 20px 80px; }
     .masonry { columns: 2; }
@@ -225,15 +226,12 @@
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:12px;">
-    <button class="translate-btn" onclick="document.querySelector('.goog-te-combo') && document.querySelector('.goog-te-combo').focus()" aria-label="Vertaal pagina">
-      🌐 <span>Taal</span>
-    </button>
+    <div id="google_translate_element"></div>
     <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
-<div id="google_translate_element" style="position:absolute;opacity:0;pointer-events:none;"></div>
 <div class="mobile-menu" id="mobile-menu">
   <a href="index.html">Home</a>
   <a href="index.html#kalender">Activiteiten</a>
@@ -262,13 +260,11 @@
     <div>Klik op <strong>"Foto's uploaden"</strong> om je foto's te delen met de buurt. Ze verschijnen meteen in het grid hieronder!</div>
   </div>
 
-  <!-- FACEBOOK ALBUMS -->
   <div class="albums-section">
     <div class="albums-title">📁 Facebook albums</div>
     <div id="albums-grid"></div>
   </div>
 
-  <!-- CLOUDINARY FOTO GRID -->
   <div class="fotos-title">📸 Buurtfoto's</div>
   <div class="masonry" id="photo-grid">
     <div class="empty-grid" style="column-span:all">
@@ -278,7 +274,6 @@
   </div>
 </main>
 
-<!-- LIGHTBOX -->
 <div id="lightbox">
   <button class="lb-close" onclick="closeLightbox()">✕</button>
   <button class="lb-nav lb-prev" onclick="lbNav(-1)">‹</button>
@@ -293,7 +288,7 @@
       <a href="https://www.facebook.com/groups/1399586126957590" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
         <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
       </a>
-      <a href="https://wa.me/" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp">
+      <a href="https://chat.whatsapp.com/LuFKqlBPwKa1WrH4NCgF2A" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       </a>
     </div>
@@ -306,21 +301,28 @@
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'nl',
-    includedLanguages: 'nl,en,fr,de,ar,tr,pl,ro,bg',
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    includedLanguages: 'nl,fr,en,pl,bg,tr',
+    layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+    autoDisplay: false
   }, 'google_translate_element');
+  setTimeout(function() {
+    const combo = document.querySelector('.goog-te-combo');
+    if (combo) {
+      const opt = combo.querySelector('option[value=""]');
+      if (opt) opt.textContent = '🌐 Taal';
+    }
+  }, 800);
 }
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <!-- Cloudinary Upload Widget -->
 <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
 
 <script>
-// ── CLOUDINARY CONFIG ──
 const CLOUD_NAME = 'dgqpatpiz';
 const UPLOAD_PRESET = 'leefstraat';
 
-// Upload widget
 const uploadWidget = cloudinary.createUploadWidget({
   cloudName: CLOUD_NAME,
   uploadPreset: UPLOAD_PRESET,
@@ -330,12 +332,8 @@ const uploadWidget = cloudinary.createUploadWidget({
   language: 'nl',
   text: {
     nl: {
-      or: 'of',
-      back: 'Terug',
-      advanced: 'Geavanceerd',
-      close: 'Sluiten',
-      no_results: 'Geen resultaten',
-      search_placeholder: 'Zoeken...',
+      or: 'of', back: 'Terug', advanced: 'Geavanceerd', close: 'Sluiten',
+      no_results: 'Geen resultaten', search_placeholder: 'Zoeken...',
       about_uw: 'Over de widget',
       menu: { files: 'Mijn bestanden', web: 'Webadres', camera: 'Camera' },
       selection_counter: { file: 'bestand', files: 'bestanden' },
@@ -352,7 +350,6 @@ const uploadWidget = cloudinary.createUploadWidget({
   if (!error && result && result.event === 'success') {
     const url = result.info.secure_url;
     const publicId = result.info.public_id;
-    // Sla op in localStorage als backup
     const photos = JSON.parse(localStorage.getItem('lf-cld-photos') || '[]');
     photos.unshift({ url, publicId, ts: Date.now() });
     localStorage.setItem('lf-cld-photos', JSON.stringify(photos));
@@ -362,18 +359,15 @@ const uploadWidget = cloudinary.createUploadWidget({
 
 document.getElementById('upload-btn').addEventListener('click', () => uploadWidget.open());
 
-// ── CLOUDINARY FOTO OPHALEN ──
 let allPhotos = [];
 let lbIndex = 0;
-let nextCursor = null;
 let loading = false;
 
 async function fetchPhotos(reset = false) {
   if (loading) return;
   loading = true;
-  if (reset) { allPhotos = []; nextCursor = null; }
+  if (reset) { allPhotos = []; }
   try {
-    // Gebruik Cloudinary search API via tag
     const url = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/leefstraat.json?max_results=100`;
     const res = await fetch(url);
     if (res.ok) {
@@ -383,12 +377,10 @@ async function fetchPhotos(reset = false) {
         publicId: r.public_id
       }));
     } else {
-      // Fallback: gebruik localStorage
       allPhotos = JSON.parse(localStorage.getItem('lf-cld-photos') || '[]');
     }
     renderGrid();
   } catch(e) {
-    // Fallback: gebruik localStorage
     allPhotos = JSON.parse(localStorage.getItem('lf-cld-photos') || '[]');
     renderGrid();
   }
@@ -398,10 +390,7 @@ async function fetchPhotos(reset = false) {
 function renderGrid() {
   const grid = document.getElementById('photo-grid');
   if (allPhotos.length === 0) {
-    grid.innerHTML = `<div class="empty-grid" style="column-span:all">
-      <div class="empty-grid-icon">📷</div>
-      <div>Nog geen foto's — wees de eerste!</div>
-    </div>`;
+    grid.innerHTML = `<div class="empty-grid" style="column-span:all"><div class="empty-grid-icon">📷</div><div>Nog geen foto's — wees de eerste!</div></div>`;
     return;
   }
   grid.innerHTML = allPhotos.map((p, i) => `
@@ -412,11 +401,9 @@ function renderGrid() {
 }
 
 function addPhotoToGrid(url, publicId) {
-  // Herlaad alle foto's van Cloudinary na upload
   setTimeout(() => fetchPhotos(true), 1500);
 }
 
-// ── LIGHTBOX ──
 function openLightbox(idx) {
   lbIndex = idx;
   document.getElementById('lb-img').src = allPhotos[idx].url;
@@ -435,47 +422,28 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') lbNav(1);
 });
 
-// ── FACEBOOK ALBUMS ──
 const MONTHS = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
-// ACTIVITEITEN en VASTE_ALBUMS komen uit data.js
 const fbIcon = `<svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:white;flex-shrink:0"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`;
 
 function renderAlbums() {
-  const evts = [...ACTIVITEITEN]
-    .filter(e => e.fb && e.fb.trim() !== '')
-    .sort((a,b) => b.date.localeCompare(a.date));
+  const evts = [...ACTIVITEITEN].filter(e => e.fb && e.fb.trim() !== '').sort((a,b) => b.date.localeCompare(a.date));
   const grid = document.getElementById('albums-grid');
-
   const vasteHtml = VASTE_ALBUMS.map(a => `
     <a href="${a.fb}" target="_blank" rel="noopener" class="fb-link-big">
-      <div class="fb-link-big-left">${fbIcon}
-        <div>
-          <div class="fb-link-big-title">📸 ${a.name}</div>
-          <div class="fb-link-big-sub">${a.date} · Bekijk op Facebook</div>
-        </div>
-      </div>
+      <div class="fb-link-big-left">${fbIcon}<div><div class="fb-link-big-title">📸 ${a.name}</div><div class="fb-link-big-sub">${a.date} · Bekijk op Facebook</div></div></div>
       <div class="fb-link-big-arrow">→</div>
     </a>`).join('');
-
   const evtHtml = evts.map(e => {
     const p = e.date.split('-');
     const datum = `${parseInt(p[2])} ${MONTHS[parseInt(p[1])-1]} ${p[0]}`;
-    return `
-    <a href="${e.fb}" target="_blank" rel="noopener" class="fb-link-big">
-      <div class="fb-link-big-left">${fbIcon}
-        <div>
-          <div class="fb-link-big-title">📸 ${e.name}</div>
-          <div class="fb-link-big-sub">${datum} · Bekijk op Facebook</div>
-        </div>
-      </div>
+    return `<a href="${e.fb}" target="_blank" rel="noopener" class="fb-link-big">
+      <div class="fb-link-big-left">${fbIcon}<div><div class="fb-link-big-title">📸 ${e.name}</div><div class="fb-link-big-sub">${datum} · Bekijk op Facebook</div></div></div>
       <div class="fb-link-big-arrow">→</div>
     </a>`;
   }).join('');
-
   grid.innerHTML = vasteHtml + evtHtml;
 }
 
-// ── HAMBURGER ──
 function toggleMenu() {
   document.getElementById('hamburger').classList.toggle('open');
   document.getElementById('mobile-menu').classList.toggle('open');
@@ -485,7 +453,6 @@ function closeMenu() {
   document.getElementById('mobile-menu').classList.remove('open');
 }
 
-// ── INIT ──
 fetchPhotos();
 renderAlbums();
 </script>
