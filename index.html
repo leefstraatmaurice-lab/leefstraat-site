@@ -337,7 +337,7 @@
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'nl',
-    includedLanguages: 'nl,fr,en,sq,pl,bg,tr',
+    includedLanguages: 'nl,fr,en,pl,bg,tr',
     layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
     autoDisplay: false
   }, 'google_translate_element');
@@ -348,6 +348,26 @@ function googleTranslateElementInit() {
       const opt = combo.querySelector('option[value=""]');
       if (opt) opt.textContent = '🌐 Taal';
     }
+    // Verberg alle Google branding elementen
+    const hide = [
+      '.goog-te-gadget a',
+      '.goog-te-gadget span:not(.goog-te-combo *)',
+      '.goog-logo-link',
+      '.goog-logo'
+    ];
+    hide.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => {
+        el.style.cssText = 'display:none!important';
+      });
+    });
+    // Herhaal na 2s voor elementen die later laden
+    setTimeout(() => {
+      hide.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => {
+          el.style.cssText = 'display:none!important';
+        });
+      });
+    }, 2000);
   }, 800);
 }
 </script>
