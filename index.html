@@ -348,27 +348,28 @@ function googleTranslateElementInit() {
       const opt = combo.querySelector('option[value=""]');
       if (opt) opt.textContent = '🌐 Taal';
     }
-    // Verberg alle Google branding elementen
-    const hide = [
-      '.goog-te-gadget a',
-      '.goog-te-gadget span:not(.goog-te-combo *)',
-      '.goog-logo-link',
-      '.goog-logo'
-    ];
-    hide.forEach(sel => {
-      document.querySelectorAll(sel).forEach(el => {
-        el.style.cssText = 'display:none!important';
-      });
-    });
-    // Herhaal na 2s voor elementen die later laden
-    setTimeout(() => {
-      hide.forEach(sel => {
-        document.querySelectorAll(sel).forEach(el => {
-          el.style.cssText = 'display:none!important';
-        });
-      });
-    }, 2000);
   }, 800);
+
+  // MutationObserver: verberg Google branding zodra die verschijnt
+  const observer = new MutationObserver(function() {
+    const gadget = document.querySelector('.goog-te-gadget');
+    if (gadget) {
+      // Verberg alle directe children behalve de select
+      Array.from(gadget.childNodes).forEach(node => {
+        if (node.nodeType === 1 && node.tagName !== 'SELECT' && !node.classList.contains('goog-te-combo')) {
+          node.style.cssText = 'display:none!important';
+        }
+        if (node.nodeType === 3) {
+          // Tekstnodes verbergen via wrapping
+          const span = document.createElement('span');
+          span.style.display = 'none';
+          node.parentNode.insertBefore(span, node);
+          span.appendChild(node);
+        }
+      });
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
