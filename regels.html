@@ -31,16 +31,29 @@
   .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 14px; font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s; }
   .nav-links a:hover, .nav-links a.active { color: var(--green-deep); }
 
-  /* TRANSLATE KNOP */
-  .translate-btn {
-    background: none; border: 1.5px solid rgba(45,80,22,0.2);
-    border-radius: 999px; padding: 6px 12px;
-    cursor: pointer; font-size: 13px; color: var(--green-mid);
-    font-family: 'DM Sans', sans-serif; font-weight: 500;
-    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  /* TRANSLATE WIDGET */
+  #google_translate_element { display: inline-flex; align-items: center; min-width: 160px; }
+  .goog-te-gadget { display: inline-flex !important; align-items: center !important; }
+  .goog-te-gadget img { display: none !important; }
+  .goog-te-gadget > span { display: none !important; }
+  .goog-te-combo {
+    border: 1.5px solid rgba(45,80,22,0.2) !important;
+    border-radius: 999px !important;
+    padding: 7px 14px !important;
+    font-size: 13px !important;
+    color: var(--green-mid) !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    outline: none !important;
+    background: var(--cream) !important;
+    display: inline-block !important;
   }
-  .translate-btn:hover { background: var(--green-pale); border-color: var(--green-mid); }
-  #google_translate_element { position: absolute; opacity: 0; pointer-events: none; }
+  .goog-te-combo:hover { background: var(--green-pale) !important; }
+  .goog-te-banner-frame { display: none !important; }
+  .goog-logo-link { display: none !important; }
+  .goog-te-combo option[value=""] { display: none !important; }
+  body { top: 0 !important; }
 
   /* PAGE HEADER */
   .page-header { padding: 160px 48px 80px; background: var(--sand); position: relative; overflow: hidden; }
@@ -94,7 +107,6 @@
     .nav-links { display: none; }
     .hamburger { display: flex; }
     nav { padding: 14px 20px; }
-    .translate-btn span { display: none; }
     .page-header { padding: 120px 20px 60px; }
     main { padding: 48px 20px 80px; }
     .rule-item { padding: 16px; }
@@ -113,9 +125,7 @@
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:12px;">
-    <button class="translate-btn" onclick="document.querySelector('.goog-te-combo') && document.querySelector('.goog-te-combo').focus()" aria-label="Vertaal pagina">
-      🌐 <span>Taal</span>
-    </button>
+    <div id="google_translate_element"></div>
     <button class="hamburger" id="hamburger" aria-label="Menu openen" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -129,7 +139,6 @@
   <a href="index.html#contact">Contact</a>
 </div>
 
-<div id="google_translate_element" style="position:absolute;opacity:0;pointer-events:none;"></div>
 
 <div class="page-header">
   <div class="header-bg"></div>
@@ -266,9 +275,17 @@
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'nl',
-    includedLanguages: 'nl,en,fr,de,ar,tr,pl,ro,bg',
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    includedLanguages: 'nl,fr,en,pl,bg,tr',
+    layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+    autoDisplay: false
   }, 'google_translate_element');
+  setTimeout(function() {
+    const combo = document.querySelector('.goog-te-combo');
+    if (combo) {
+      const opt = combo.querySelector('option[value=""]');
+      if (opt) opt.textContent = '🌐 Taal';
+    }
+  }, 800);
 }
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
