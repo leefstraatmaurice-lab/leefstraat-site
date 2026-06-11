@@ -4,7 +4,7 @@
 
 const ACTIVITEITEN = [
   {
-    date: '2026-06-11',
+    date: '2026-06-12',
     name: 'Hot Dogs Party',
     note: '17:30',
     fb: ''
