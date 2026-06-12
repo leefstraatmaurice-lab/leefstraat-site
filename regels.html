@@ -52,7 +52,6 @@
   .goog-te-combo:hover { background: var(--green-pale) !important; }
   .goog-te-banner-frame { display: none !important; }
   .goog-logo-link { display: none !important; }
-  .goog-te-gadget span { display: none !important; }
   .goog-te-combo option[value=""] { display: none !important; }
   body { top: 0 !important; }
 
@@ -168,6 +167,14 @@
         </div>
         <span class="rule-badge badge-must">Verplicht</span>
       </div>
+      <div class="rule-item">
+        <div class="rule-icon">👶</div>
+        <div class="rule-body">
+          <div class="rule-title">Kinderen hebben voorrang</div>
+          <div class="rule-desc">De straat is tijdens activiteiten in de eerste plaats een speelruimte. Volwassenen passen zich aan.</div>
+        </div>
+        <span class="rule-badge badge-kind">Vriendelijk verzoek</span>
+      </div>
     </div>
   </div>
 
@@ -178,17 +185,17 @@
         <div class="rule-icon">🎵</div>
         <div class="rule-body">
           <div class="rule-title">Muziek stopt om 22u</div>
-          <div class="rule-desc">We respecteren de nachtrust van alle bewoners. Muziek en luide activiteiten stoppen om 22u00.</div>
+          <div class="rule-desc">We respecteren de nachtrust van alle bewoners. Muziek en luide activiteiten eindigen uiterlijk om 22u00.</div>
         </div>
         <span class="rule-badge badge-must">Verplicht</span>
-       </div>
-       <div class="rule-item">
-        <div class="rule-icon">⚽</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">😊</div>
         <div class="rule-body">
-          <div class="rule-title">Voetballen mag — met een zachte bal</div>
-          <div class="rule-desc">Spelen is toegestaan, maar gebruik alleen een zachte schuimbal. Hou rekening met de omgeving, medebewoners en hun eigendommen.</div>
+          <div class="rule-title">Iedereen is welkom</div>
+          <div class="rule-desc">Jong, oud, met of zonder kinderen — de Leefstraat is voor alle bewoners. Inclusief en open.</div>
         </div>
-        <span class="rule-badge badge-must">Verplicht</span>
+        <span class="rule-badge badge-kind">Vriendelijk verzoek</span>
       </div>
     </div>
   </div>
@@ -196,14 +203,6 @@
   <div class="rules-section">
     <h2 class="rules-section-title">Netheid & respect</h2>
     <div class="rules-list">
-     <div class="rule-item">
-  <div class="rule-icon">🚬</div>
-  <div class="rule-body">
-    <div class="rule-title">Roken uit de buurt van kinderen</div>
-    <div class="rule-desc">Roken is toegestaan, maar doe dit uit de buurt van kinderen en anderen die er hinder van ondervinden. Gooi peuken niet op de grond of op de matten — breng gewoon je eigen asbak mee.</div>
-  </div>
-  <span class="rule-badge badge-must">Verplicht</span>
-</div>
       <div class="rule-item">
         <div class="rule-icon">🧹</div>
         <div class="rule-body">
@@ -242,6 +241,13 @@
         </div>
         <span class="rule-badge badge-kind">Vriendelijk verzoek</span>
       </div>
+      <div class="rule-item">
+        <div class="rule-icon">🙋</div>
+        <div class="rule-body">
+          <div class="rule-title">Vragen? Spreek een organisator aan</div>
+          <div class="rule-desc">De organisatoren zijn herkenbaar aanwezig tijdens elke activiteit. Bij twijfel, vragen of problemen: stap gewoon op ons af.</div>
+        </div>
+        <span class="rule-badge badge-kind">Vriendelijk verzoek</span>
       </div>
       <div class="rule-item">
         <div class="rule-icon">💡</div>
@@ -259,6 +265,22 @@
     <div class="info-box-text">Behandel de straat en je buren zoals je zelf behandeld wil worden. Dat is eigenlijk het enige wat telt. De rest volgt vanzelf.</div>
     <a href="index.html#contact" class="info-box-link">Contacteer de organisatoren →</a>
   </div>
+
+  <div style="margin-top:32px; background:var(--sand); border-radius:var(--radius); padding:28px 32px; border:1px solid rgba(0,0,0,0.06);">
+    <div style="font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-light); margin-bottom:12px;">⚠️ Aansprakelijkheid</div>
+    <p style="font-size:13px; color:var(--text-mid); line-height:1.7; margin-bottom:10px;">
+      De organisatoren van de Leefstraat Maurice Verdoncklaan zijn vrijwilligers die handelen in de geest van buurtverbinding. Deelname aan activiteiten gebeurt op eigen risico. De organisatoren kunnen niet aansprakelijk gesteld worden voor ongevallen, letsels of schade aan personen of eigendommen die zich voordoen tijdens of in verband met de activiteiten van de Leefstraat.
+    </p>
+    <p style="font-size:13px; color:var(--text-mid); line-height:1.7; margin-bottom:10px;">
+      Elke bewoner, bezoeker of derde die schade aanricht aan het openbaar domein, aan materiaal van de Stad Gent of aan eigendommen van buurtbewoners, is hiervoor persoonlijk aansprakelijk. Dit is in overeenstemming met het officiële reglement voor de organisatie van Leefstraten van Stad Gent.
+    </p>
+    <p style="font-size:13px; color:var(--text-mid); line-height:1.7; margin-bottom:10px;">
+      Bij vragen, klachten of problemen kan je steeds terecht via het <a href="index.html#contact" style="color:var(--green-mid); font-weight:500;">contactformulier</a>. Organisatoren worden niet persoonlijk aangesproken tijdens de activiteiten.
+    </p>
+    <p style="font-size:12px; color:var(--text-light); line-height:1.6;">
+      Deze disclaimer is louter informatief en vervangt geen juridisch advies. Bron: Reglement Leefstraten Stad Gent.
+    </p>
+  </div>
 </main>
 
 <footer>
@@ -269,7 +291,7 @@
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'nl',
-    includedLanguages: 'nl,fr,en,sq,pl,bg,tr',
+    includedLanguages: 'nl,fr,en,pl,bg,tr',
     layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
     autoDisplay: false
   }, 'google_translate_element');
@@ -280,6 +302,8 @@ function googleTranslateElementInit() {
       if (opt) opt.textContent = '🌐 Taal';
     }
   }, 800);
+
+
 }
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
