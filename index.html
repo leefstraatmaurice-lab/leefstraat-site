@@ -246,6 +246,16 @@
     .footer-inner { padding: 24px 20px 16px; }
     .footer-copy { padding: 16px 20px; }
   }
+
+  /* VOORBIJ BADGE */
+  .event-past { opacity: 0.45; filter: grayscale(50%); }
+  .event-past:hover { transform: none; box-shadow: none; }
+  .badge-past {
+    position: absolute; top: 12px; right: 12px;
+    background: rgba(0,0,0,0.65); color: #fff;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 3px 9px; border-radius: 999px;
+  }
 </style>
 </head>
 <body>
@@ -365,6 +375,13 @@ function googleTranslateElementInit() {
 const MONTHS = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
 
 function renderEvents() {
+  const today = (function() {
+    const d = new Date();
+    return d.getFullYear() + '-' +
+      String(d.getMonth()+1).padStart(2,'0') + '-' +
+      String(d.getDate()).padStart(2,'0');
+  })();
+
   const evts = [...ACTIVITEITEN].sort((a,b) => a.date.localeCompare(b.date));
   const grid = document.getElementById('events-grid');
   grid.innerHTML = evts.map(e => {
@@ -372,7 +389,9 @@ function renderEvents() {
     const day = parseInt(p[2]);
     const month = MONTHS[parseInt(p[1])-1];
     const year = p[0];
-    return `<div class="event-card">
+    const voorbij = e.date < today;
+    return `<div class="event-card${voorbij ? ' event-past' : ''}">
+      ${voorbij ? '<span class="badge-past">Voorbij</span>' : ''}
       <div class="event-date">${day}</div>
       <div class="event-month">${month} ${year}</div>
       <div class="event-name">${e.name}</div>
