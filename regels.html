@@ -89,7 +89,14 @@
   .info-box-link:hover { background: #C4731A; }
 
   /* FOOTER */
-  footer { background: var(--green-deep); text-align: center; padding: 28px; color: rgba(255,255,255,0.3); font-size: 12px; }
+  footer { background: var(--green-deep); border-top: 1px solid rgba(255,255,255,0.08); }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 32px 48px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: white; }
+  .footer-social { display: flex; gap: 12px; }
+  .social-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: background 0.2s; text-decoration: none; }
+  .social-icon:hover { background: rgba(255,255,255,0.22); }
+  .social-icon svg { width: 18px; height: 18px; fill: white; }
+  .footer-copy { text-align: center; padding: 20px 48px; color: rgba(255,255,255,0.3); font-size: 12px; }
 
   /* HAMBURGER */
   .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; justify-content: center; align-items: center; flex-shrink: 0; z-index: 101; }
@@ -110,6 +117,8 @@
     .page-header { padding: 120px 20px 60px; }
     main { padding: 48px 20px 80px; }
     .rule-item { padding: 16px; }
+    .footer-inner { padding: 24px 20px 16px; }
+    .footer-copy { padding: 16px 20px; }
   }
 </style>
 </head>
@@ -139,7 +148,6 @@
   <a href="index.html#contact">Contact</a>
 </div>
 
-
 <div class="page-header">
   <div class="header-bg"></div>
   <div class="page-tag">Samenleven</div>
@@ -149,7 +157,7 @@
 
 <main>
   <div class="rules-section">
-    <h2 class="rules-section-title">Verkeer & veiligheid</h2>
+    <h2 class="rules-section-title">Verkeer &amp; veiligheid</h2>
     <div class="rules-list">
       <div class="rule-item">
         <div class="rule-icon">🚗</div>
@@ -175,11 +183,19 @@
         </div>
         <span class="rule-badge badge-kind">Vriendelijk verzoek</span>
       </div>
+      <div class="rule-item">
+        <div class="rule-icon">⚽</div>
+        <div class="rule-body">
+          <div class="rule-title">Voetballen enkel met een zachte schuimbal</div>
+          <div class="rule-desc">Voetballen mag, maar uitsluitend met een zachte mouse- of schuimbal. Harde ballen zijn niet toegestaan — zo houden we ramen, auto's en andere kinderen heel.</div>
+        </div>
+        <span class="rule-badge badge-must">Verplicht</span>
+      </div>
     </div>
   </div>
 
   <div class="rules-section">
-    <h2 class="rules-section-title">Geluid & sfeer</h2>
+    <h2 class="rules-section-title">Geluid &amp; sfeer</h2>
     <div class="rules-list">
       <div class="rule-item">
         <div class="rule-icon">🎵</div>
@@ -197,11 +213,19 @@
         </div>
         <span class="rule-badge badge-kind">Vriendelijk verzoek</span>
       </div>
+      <div class="rule-item">
+        <div class="rule-icon">🚬</div>
+        <div class="rule-body">
+          <div class="rule-title">Roken uit de buurt van kinderen</div>
+          <div class="rule-desc">Roken is toegestaan, maar houd afstand van kinderen en andere buurtbewoners die dit niet wensen. Peuken gooi je niet op de grond of op de matten — neem ze mee en gooi ze zelf weg in een vuilbak.</div>
+        </div>
+        <span class="rule-badge badge-must">Verplicht</span>
+      </div>
     </div>
   </div>
 
   <div class="rules-section">
-    <h2 class="rules-section-title">Netheid & respect</h2>
+    <h2 class="rules-section-title">Netheid &amp; respect</h2>
     <div class="rules-list">
       <div class="rule-item">
         <div class="rule-icon">🧹</div>
@@ -231,7 +255,7 @@
   </div>
 
   <div class="rules-section">
-    <h2 class="rules-section-title">Organisatie & materiaal</h2>
+    <h2 class="rules-section-title">Organisatie &amp; materiaal</h2>
     <div class="rules-list">
       <div class="rule-item">
         <div class="rule-icon">📋</div>
@@ -321,8 +345,6 @@ function googleTranslateElementInit() {
       if (opt) opt.textContent = '🌐 Taal';
     }
   }, 800);
-
-
 }
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
