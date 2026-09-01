@@ -334,7 +334,7 @@
   <a href="index.html" class="nav-logo">Leefstraat<br>Maurice Verdoncklaan</a>
   <ul class="nav-links">
     <li><a href="#hero">Home</a></li>
-    <li><a href="#kalender">Activiteiten</a></li>
+    <li id="nav-agenda"><a href="#kalender">Activiteiten</a></li>
     <li><a href="fotos.html">Foto's</a></li>
     <li><a href="regels.html">Regels</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -348,7 +348,7 @@
 </nav>
 <div class="mobile-menu" id="mobile-menu">
   <a href="#hero" onclick="closeMenu()">Home</a>
-  <a href="#kalender" onclick="closeMenu()">Activiteiten</a>
+  <a href="#kalender" onclick="closeMenu()" id="nav-agenda-mobiel">Activiteiten</a>
   <a href="fotos.html" onclick="closeMenu()">Foto's</a>
   <a href="regels.html" onclick="closeMenu()">Regels</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
@@ -475,13 +475,15 @@ function renderHero() {
       <div class="hero-cijfer-label">${esc(c.label)}</div>
     </div>`).join('');
 
+  const agendaAan = (typeof TOON_AGENDA === 'undefined') ? true : TOON_AGENDA;
+
   el.innerHTML = `
     ${TERUGBLIK.tag ? `<div class="hero-tag">${esc(TERUGBLIK.tag)}</div>` : ''}
     <h1 class="hero-title">${TERUGBLIK.titel}</h1>
     <p class="hero-sub">${esc(TERUGBLIK.tekst)}</p>
     ${cijfers ? `<div class="hero-cijfers">${cijfers}</div>` : ''}
     ${TERUGBLIK.knop ? `<a href="${esc(TERUGBLIK.knop.link)}" class="hero-cta">${esc(TERUGBLIK.knop.tekst)}</a>` : ''}
-    ${TERUGBLIK.vervolg ? `<p class="hero-vervolg">${esc(TERUGBLIK.vervolg)}</p>` : ''}
+    ${(TERUGBLIK.vervolg && agendaAan) ? `<p class="hero-vervolg">${esc(TERUGBLIK.vervolg)}</p>` : ''}
   `;
 }
 
@@ -516,6 +518,21 @@ function eventCard(e, voorbij, binnenkort) {
 }
 
 function renderEvents() {
+  // Agenda aan/uit
+  const agendaAan = (typeof TOON_AGENDA === 'undefined') ? true : TOON_AGENDA;
+  const sectie = document.getElementById('kalender');
+  const navD = document.getElementById('nav-agenda');
+  const navM = document.getElementById('nav-agenda-mobiel');
+  if (!agendaAan) {
+    if (sectie) sectie.style.display = 'none';
+    if (navD) navD.style.display = 'none';
+    if (navM) navM.style.display = 'none';
+    return;
+  }
+  if (sectie) sectie.style.display = '';
+  if (navD) navD.style.display = '';
+  if (navM) navM.style.display = '';
+
   const today = todayStr();
 
   const over7 = (function() {

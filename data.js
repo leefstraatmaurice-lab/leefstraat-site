@@ -12,6 +12,14 @@ const SEIZOEN = 'bedankt';
 
 
 // ═══════════════════════════════════════════
+//  AGENDA AAN/UIT — verberg de activiteiten tot de data klopt
+// ═══════════════════════════════════════════
+// false → agenda volledig verborgen (menu-item + sectie)
+// true  → agenda zichtbaar
+const TOON_AGENDA = false;
+
+
+// ═══════════════════════════════════════════
 //  2. TERUGBLIK — enkel zichtbaar bij SEIZOEN = 'bedankt'
 // ═══════════════════════════════════════════
 // ⚠️ PAS DE CIJFERS AAN — dit zijn schattingen
