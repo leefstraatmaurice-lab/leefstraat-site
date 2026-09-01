@@ -241,7 +241,11 @@
   @media (max-width: 768px) {
     nav { padding: 16px 20px; }
     section { padding: 64px 20px; }
-    #hero { padding: 0 20px 60px; }
+    #hero { padding: 96px 20px 48px; min-height: auto; justify-content: flex-start; }
+    .hero-title { font-size: clamp(40px, 13vw, 72px); }
+    .hero-cijfers { gap: 28px; margin-top: 26px; }
+    .hero-cijfer-getal { font-size: 34px; }
+    .hero-scroll { display: none; }
     .contact-grid { grid-template-columns: 1fr; }
     .footer-inner { padding: 24px 20px 16px; }
     .footer-copy { padding: 16px 20px; }
@@ -336,7 +340,7 @@
     <li><a href="#hero">Home</a></li>
     <li id="nav-agenda"><a href="#kalender">Activiteiten</a></li>
     <li><a href="fotos.html">Foto's</a></li>
-    <li><a href="regels.html">Regels Zomerleeftsraat</a></li>
+    <li><a href="regels.html">Regels Zomer leefstraat</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:12px;">
@@ -350,7 +354,7 @@
   <a href="#hero" onclick="closeMenu()">Home</a>
   <a href="#kalender" onclick="closeMenu()" id="nav-agenda-mobiel">Activiteiten</a>
   <a href="fotos.html" onclick="closeMenu()">Foto's</a>
-  <a href="regels.html" onclick="closeMenu()">Regels Zomerleeftsraat</a>
+  <a href="regels.html" onclick="closeMenu()">Regels Zomer leefstraat</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
 </div>
 
