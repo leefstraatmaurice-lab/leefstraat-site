@@ -16,7 +16,7 @@ const SEIZOEN = 'bedankt';
 // ═══════════════════════════════════════════
 // false → agenda volledig verborgen (menu-item + sectie)
 // true  → agenda zichtbaar
-const TOON_AGENDA = true;
+const TOON_AGENDA = false;
 
 
 // ═══════════════════════════════════════════
