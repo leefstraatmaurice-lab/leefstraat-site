@@ -142,8 +142,8 @@
     <!-- OPGESLAGEN BANNER -->
     <div class="save-banner" id="save-banner">
       <div>
-        <div class="save-banner-text">✓ Wijzigingen opgeslagen</div>
-        <div class="save-banner-sub">De activiteiten zijn bijgewerkt op de website.</div>
+        <div class="save-banner-text">✓ Lokaal opgeslagen — nog niet online</div>
+        <div class="save-banner-sub">Klik op “Genereer data.js”, kopieer de code en vervang data.js op GitHub.</div>
       </div>
       <button class="btn-save-main" onclick="hideSaveBanner()">Oké</button>
     </div>
@@ -161,6 +161,7 @@
           <input type="date" id="new-date" class="form-input">
           <input type="text" id="new-name" class="form-input" placeholder="Naam van de activiteit">
           <textarea id="new-note" class="form-input" rows="2" placeholder="Notitie (optioneel)"></textarea>
+          <input type="text" id="new-trekker" class="form-input" placeholder="Trekker (optioneel)">
           <input type="url" id="new-fb" class="form-input" placeholder="Facebook albumlink (optioneel)" style="grid-column:span 2">
         </div>
         <button class="btn-green" onclick="addEvent()">+ Toevoegen</button>
@@ -168,6 +169,29 @@
         <!-- Bestaande lijst -->
         <div style="font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--green-mid);margin-top:32px;margin-bottom:12px;">Bestaande activiteiten</div>
         <div class="event-list" id="event-list"></div>
+      </div>
+    </div>
+
+    <!-- PUBLICEREN -->
+    <div class="admin-card">
+      <div class="card-header">
+        <div class="card-title">🚀 Publiceren</div>
+      </div>
+      <div class="card-body">
+        <p style="font-size:14px;color:var(--text-mid);line-height:1.6;margin-bottom:16px;">
+          Wijzigingen hier staan enkel op <strong>dit toestel</strong>. Om ze online te zetten:
+          genereer hieronder de code, kopieer die, en plak ze over de inhoud van <code>data.js</code> in GitHub.
+        </p>
+        <button class="btn-green" onclick="genereerDataJs()">📄 Genereer data.js</button>
+        <button class="btn-green" onclick="kopieerDataJs()" style="margin-left:8px;">📋 Kopieer</button>
+        <button class="btn-green" onclick="herlaadUitBestand()" style="margin-left:8px;background:var(--amber);">↺ Herlaad uit data.js</button>
+        <p style="font-size:13px;color:var(--text-light);line-height:1.6;margin-top:14px;">
+          Gebruik <strong>Herlaad</strong> als de lijst hierboven niet klopt met wat er online staat —
+          bijvoorbeeld op een toestel waar je vroeger al iets bewerkt hebt. Dit gooit je lokale
+          wijzigingen weg en start opnieuw vanaf de online <code>data.js</code>.
+        </p>
+        <textarea id="export-box" class="form-input" rows="14" readonly
+          style="width:100%;margin-top:16px;display:none;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.5;white-space:pre;"></textarea>
       </div>
     </div>
 
@@ -186,13 +210,14 @@
 
   </div>
 
-  <footer>Admin paneel · Leefstraat Maurice Verdoncklaan 2026 · Niet delen</footer>
+  <footer>Admin paneel · Leefstraat Maurice Verdoncklaan · Niet delen</footer>
 </div>
 
 <div id="toast"></div>
 
+<script src="data.js"></script>
 <script>
-const PW_HASH = '67c25b7bbc4f2a00d0a28a4bc5a18637f6b6394f1468ef6c22c78c02b50ab9d9';
+const PW_HASH = '20a0c3c4512d52c3999f8a9dd2f87f3f7cd268861be3ffc5b25e6d0cdb855b47';
 let attempts = 0;
 let lockUntil = parseInt(sessionStorage.getItem('lf-lock') || '0');
 
@@ -245,12 +270,9 @@ if (sessionStorage.getItem('lf-auth') === '1') {
 
 // ── ACTIVITEITEN ──
 const MONTHS = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
-const DEFAULT = [
-  { date: '2026-06-05', name: 'Opening met hot dogs', note: 'Kookwurstje regelen — check bij Julien' },
-  { date: '2026-07-11', name: 'Spelletjesavond afterwork', note: '' },
-  { date: '2026-08-16', name: 'Koffie & taart', note: '' },
-  { date: '2026-08-23', name: 'BBQ', note: '' }
-];
+const DEFAULT = (typeof ACTIVITEITEN !== 'undefined')
+  ? JSON.parse(JSON.stringify(ACTIVITEITEN))
+  : [];
 
 function load() { return JSON.parse(localStorage.getItem('lf-events') || JSON.stringify(DEFAULT)); }
 function save(evts) {
@@ -274,6 +296,7 @@ function renderEvents() {
         <div class="event-row-info">
           <div class="event-row-name">${e.name}</div>
           ${e.note ? `<div class="event-row-note">${e.note}</div>` : ''}
+          ${e.trekker ? `<div class="event-row-note" style="color:var(--green-mid)">👤 Trekker: ${e.trekker}</div>` : '<div class="event-row-note" style="color:var(--amber)">👤 Trekker gezocht</div>'}
           ${e.fb ? `<div class="event-row-note" style="color:#1877F2">📷 Facebook album gekoppeld</div>` : '<div class="event-row-note" style="color:var(--amber)">📷 Nog geen album</div>'}
         </div>
         <div class="event-row-actions">
@@ -286,6 +309,7 @@ function renderEvents() {
           <input type="date" class="form-input" id="edit-date-${i}" value="${e.date}">
           <input type="text" class="form-input" id="edit-name-${i}" value="${e.name}">
           <textarea class="form-input" id="edit-note-${i}" rows="2">${e.note}</textarea>
+          <input type="text" class="form-input" id="edit-trekker-${i}" value="${e.trekker || ''}" placeholder="Trekker (optioneel)">
           <input type="url" class="form-input" id="edit-fb-${i}" value="${e.fb || ''}" placeholder="Facebook albumlink (optioneel)" style="grid-column:span 2">
         </div>
         <div class="edit-actions">
@@ -306,6 +330,7 @@ function saveEdit(i) {
   evts[i].date = document.getElementById(`edit-date-${i}`).value;
   evts[i].name = document.getElementById(`edit-name-${i}`).value.trim();
   evts[i].note = document.getElementById(`edit-note-${i}`).value.trim();
+  evts[i].trekker = document.getElementById(`edit-trekker-${i}`).value.trim();
   evts[i].fb = document.getElementById(`edit-fb-${i}`).value.trim();
   save(evts);
   renderEvents();
@@ -315,14 +340,16 @@ function addEvent() {
   const date = document.getElementById('new-date').value;
   const name = document.getElementById('new-name').value.trim();
   const note = document.getElementById('new-note').value.trim();
+  const trekker = document.getElementById('new-trekker').value.trim();
   const fb = document.getElementById('new-fb').value.trim();
   if (!date || !name) { showToast('⚠️ Datum en naam zijn verplicht'); return; }
   const evts = load();
-  evts.push({ date, name, note, fb });
+  evts.push({ date, name, note, trekker, fb });
   save(evts);
   document.getElementById('new-date').value = '';
   document.getElementById('new-name').value = '';
   document.getElementById('new-note').value = '';
+  document.getElementById('new-trekker').value = '';
   document.getElementById('new-fb').value = '';
   renderEvents();
 }
@@ -333,6 +360,79 @@ function removeEvent(i) {
   evts.splice(i, 1);
   save(evts);
   renderEvents();
+}
+
+// ── EXPORT NAAR data.js ──
+function q(s) { return JSON.stringify(s == null ? '' : String(s)); }
+
+function bouwDataJs() {
+  const evts = load().sort((a,b) => a.date.localeCompare(b.date));
+
+  const seizoen = (typeof SEIZOEN !== 'undefined') ? SEIZOEN : 'agenda';
+  const terugblik = (typeof TERUGBLIK !== 'undefined') ? TERUGBLIK : null;
+  const vastMoment = (typeof VAST_MOMENT !== 'undefined') ? VAST_MOMENT : '';
+  const albums = (typeof VASTE_ALBUMS !== 'undefined') ? VASTE_ALBUMS : [];
+
+  let out = '';
+  out += '// ── LEEFSTRAAT MAURICE VERDONCKLAAN ──\n';
+  out += '// Gegenereerd via admin.html op ' + new Date().toLocaleString('nl-BE') + '\n';
+  out += '// Plak dit over de volledige inhoud van data.js in GitHub\n\n';
+
+  out += "// SEIZOEN: 'bedankt' of 'agenda'\n";
+  out += 'const SEIZOEN = ' + q(seizoen) + ';\n\n';
+
+  out += 'const TERUGBLIK = ' + (terugblik ? JSON.stringify(terugblik, null, 2) : 'null') + ';\n\n';
+
+  out += 'const VAST_MOMENT = ' + q(vastMoment) + ';\n\n';
+
+  out += 'const ACTIVITEITEN = [\n';
+  out += evts.map(e =>
+    '  { date: ' + q(e.date) +
+    ', name: ' + q(e.name) +
+    ', note: ' + q(e.note || '') +
+    ', trekker: ' + q(e.trekker || '') +
+    ', fb: ' + q(e.fb || '') + ' }'
+  ).join(',\n');
+  out += '\n];\n\n';
+
+  out += 'const VASTE_ALBUMS = ' + JSON.stringify(albums, null, 2) + ';\n';
+
+  return out;
+}
+
+function herlaadUitBestand() {
+  if (typeof ACTIVITEITEN === 'undefined') {
+    showToast('⚠️ data.js niet gevonden');
+    return;
+  }
+  if (!confirm('Lokale wijzigingen wissen en opnieuw starten vanaf data.js?')) return;
+  localStorage.removeItem('lf-events');
+  document.getElementById('export-box').value = '';
+  document.getElementById('export-box').style.display = 'none';
+  hideSaveBanner();
+  renderEvents();
+  showToast('↺ Herladen uit data.js');
+}
+
+function genereerDataJs() {
+  const box = document.getElementById('export-box');
+  box.value = bouwDataJs();
+  box.style.display = 'block';
+  box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  showToast('✓ data.js gegenereerd');
+}
+
+async function kopieerDataJs() {
+  const box = document.getElementById('export-box');
+  if (!box.value) box.value = bouwDataJs();
+  box.style.display = 'block';
+  try {
+    await navigator.clipboard.writeText(box.value);
+    showToast('📋 Gekopieerd naar klembord');
+  } catch (err) {
+    box.select();
+    showToast('⚠️ Kopieer handmatig (Ctrl/Cmd+C)');
+  }
 }
 
 // ── SAVE BANNER ──
