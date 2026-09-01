@@ -128,9 +128,9 @@
   <a href="index.html" class="nav-logo">Leefstraat<br>Maurice Verdoncklaan</a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="index.html#kalender">Activiteiten</a></li>
+    <li id="nav-agenda"><a href="index.html#kalender">Activiteiten</a></li>
     <li><a href="fotos.html">Foto's</a></li>
-    <li><a href="regels.html" class="active">Regels</a></li>
+    <li><a href="regels.html" class="active">Regels Zomerstraat</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:12px;">
@@ -142,9 +142,9 @@
 </nav>
 <div class="mobile-menu" id="mobile-menu">
   <a href="index.html">Home</a>
-  <a href="index.html#kalender">Activiteiten</a>
+  <a href="index.html#kalender" id="nav-agenda-mobiel">Activiteiten</a>
   <a href="fotos.html">Foto's</a>
-  <a href="regels.html" onclick="closeMenu()">Regels</a>
+  <a href="regels.html" onclick="closeMenu()">Regels Zomerstraat</a>
   <a href="index.html#contact">Contact</a>
 </div>
 
@@ -349,6 +349,7 @@ function googleTranslateElementInit() {
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+<script src="data.js"></script>
 <script>
 function toggleMenu() {
   document.getElementById('hamburger').classList.toggle('open');
@@ -358,6 +359,16 @@ function closeMenu() {
   document.getElementById('hamburger').classList.remove('open');
   document.getElementById('mobile-menu').classList.remove('open');
 }
+
+// Agenda-menu-item verbergen als de agenda uit staat
+(function() {
+  if (typeof TOON_AGENDA !== 'undefined' && TOON_AGENDA === false) {
+    const d = document.getElementById('nav-agenda');
+    const m = document.getElementById('nav-agenda-mobiel');
+    if (d) d.style.display = 'none';
+    if (m) m.style.display = 'none';
+  }
+})();
 </script>
 </body>
 </html>
