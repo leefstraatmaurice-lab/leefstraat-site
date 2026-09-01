@@ -18,9 +18,9 @@ const SEIZOEN = 'bedankt';
 const TERUGBLIK = {
   tag: 'Zomer 2026',
   titel: 'Bedankt,<br><em>buren</em>',
-  tekst: 'Drie maanden lang was de Maurice Verdoncklaan geen doorgangsweg maar een plek. ' +
-         'Kinderen op straat, stoelen op de kasseien, buren die elkaar eindelijk bij naam kennen. ' +
-         'Dat hebben we samen gedaan — bedankt aan iedereen die kwam, hielp, kookte of gewoon bleef plakken.',
+  tekst: 'Drie maanden lang stonden de stoelen buiten in plaats van de auto\'s, ' +
+         'Dankjewel aan iedereen die mee kwam koken, opruimen, spelen en babbelen — en aan wie gewoon eens bleef staan voor een praatje. ' +
+         'Zonder jullie was het maar een lege straat geweest.',
   cijfers: [
     { getal: '12',  label: 'weken straat' },
     { getal: '5',   label: 'activiteiten' },
