@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leefstraat Maurice Verdoncklaan 2026</title>
+<title>Leefstraat Maurice Verdoncklaan · Gentbrugge</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -256,6 +256,76 @@
     font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
     text-transform: uppercase; padding: 3px 9px; border-radius: 999px;
   }
+
+  /* BINNENKORT BADGE */
+  .badge-soon {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--amber); color: #fff;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 3px 9px; border-radius: 999px;
+    animation: soonpulse 2s ease-in-out infinite;
+  }
+  @keyframes soonpulse { 0%,100%{opacity:1} 50%{opacity:0.55} }
+
+  /* TERUGBLIK IN HERO */
+  .hero-cijfers {
+    display: flex; flex-wrap: wrap; gap: 40px; margin-top: 34px;
+  }
+  .hero-cijfer-getal {
+    font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 900;
+    color: var(--warm-white); line-height: 1;
+  }
+  .hero-cijfer-label {
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6); margin-top: 6px;
+  }
+  .hero-vervolg {
+    margin-top: 24px; font-size: 14px; color: rgba(255,255,255,0.6);
+    max-width: 480px; line-height: 1.6;
+  }
+
+  /* AGENDA — VAST MOMENT + SPLITSING */
+  .vast-moment {
+    background: var(--warm-white); border: 1px dashed var(--green-light);
+    border-radius: var(--radius); padding: 18px 22px; margin-bottom: 32px;
+    font-size: 14px; color: var(--text-mid); line-height: 1.6;
+  }
+  .vast-moment strong { color: var(--green-deep); font-weight: 500; }
+  .agenda-sub {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--green-mid);
+    margin-bottom: 18px;
+  }
+  .agenda-empty {
+    font-size: 15px; color: var(--text-light); line-height: 1.6;
+    padding: 24px 0;
+  }
+  #voorbij-blok { margin-top: 56px; }
+  #voorbij-blok > summary {
+    cursor: pointer; list-style: none;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--green-mid);
+    padding: 12px 0; border-top: 1px solid rgba(45,80,22,0.12);
+    display: flex; align-items: center; gap: 8px;
+  }
+  #voorbij-blok > summary::-webkit-details-marker { display: none; }
+  #voorbij-blok > summary::after { content: '▾'; font-size: 13px; transition: transform 0.2s; }
+  #voorbij-blok[open] > summary::after { transform: rotate(180deg); }
+  #voorbij-blok .events-grid { margin-top: 20px; }
+
+  /* TREKKER + HELP MEE */
+  .event-trekker {
+    font-size: 12px; color: var(--text-light); margin-top: 12px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .event-trekker strong { color: var(--green-mid); font-weight: 500; }
+  .btn-help {
+    margin-top: 14px; background: none; border: 1.5px solid var(--green-light);
+    color: var(--green-mid); padding: 7px 16px; border-radius: 999px;
+    font-family: 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 500;
+    cursor: pointer; transition: background 0.2s, color 0.2s;
+  }
+  .btn-help:hover { background: var(--green-mid); color: #fff; }
 </style>
 </head>
 <body>
@@ -288,9 +358,9 @@
 <section id="hero">
   <div class="hero-photo"></div>
   <div class="hero-bg"></div>
-  <div style="position:relative">
+  <div style="position:relative" id="hero-content">
     <h1 class="hero-title">Leefstraat<br><em>Maurice</em><br>Verdoncklaan</h1>
-    <p class="hero-sub">Onze straat leeft! Van juni tot augustus maken we samen van de Maurice Verdoncklaan een plek voor ontmoeting, spel en buurtgevoel.</p>
+    <p class="hero-sub">Onze straat leeft — het hele jaar door. Samen maken we van de Maurice Verdoncklaan een plek voor ontmoeting, spel en buurtgevoel.</p>
     <a href="#kalender" class="hero-cta">Bekijk de activiteiten →</a>
   </div>
   <div class="hero-scroll" aria-hidden="true">
@@ -302,7 +372,13 @@
 <section id="kalender">
   <div class="section-tag">Agenda</div>
   <h2 class="section-title">Wat staat er op het programma?</h2>
+  <div class="vast-moment" id="vast-moment" style="display:none;"></div>
+  <div class="agenda-sub" id="agenda-sub-next" style="display:none;">Komt eraan</div>
   <div class="events-grid" id="events-grid"></div>
+  <details id="voorbij-blok" style="display:none;">
+    <summary id="voorbij-summary">Al voorbij</summary>
+    <div class="events-grid" id="events-grid-past"></div>
+  </details>
 </section>
 
 <section id="contact">
@@ -311,7 +387,7 @@
   <div class="contact-grid">
     <div class="contact-text">
       <p>Wil je meehelpen, een activiteit voorstellen of gewoon meer info? Stuur ons een berichtje — we horen graag van onze buren.</p>
-      <p style="margin-top:20px;font-size:14px;opacity:0.5;">Leefstraat Maurice Verdoncklaan · Gentbrugge · 2026</p>
+      <p style="margin-top:20px;font-size:14px;opacity:0.5;">Leefstraat Maurice Verdoncklaan · Gentbrugge</p>
     </div>
     <form class="contact-form" id="contact-form">
       <input type="text" name="naam" placeholder="Jouw naam" required>
@@ -343,7 +419,7 @@
     </div>
   </div>
   <div class="footer-copy">
-    &copy; 2026 Leefstraat Maurice Verdoncklaan · Gentbrugge · Met ❤️ door de buurt
+    &copy; <span id="footer-jaar">2026</span> Leefstraat Maurice Verdoncklaan · Gentbrugge · Met ❤️ door de buurt
     <a href="admin.html" style="margin-left:16px;opacity:0.2;color:inherit;text-decoration:none;font-size:11px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='0.2'" title="Beheer">🔒</a>
   </div>
 </footer>
@@ -374,30 +450,136 @@ function googleTranslateElementInit() {
 <script>
 const MONTHS = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
 
+function todayStr() {
+  const d = new Date();
+  return d.getFullYear() + '-' +
+    String(d.getMonth()+1).padStart(2,'0') + '-' +
+    String(d.getDate()).padStart(2,'0');
+}
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// ── HERO ──
+function renderHero() {
+  if (typeof SEIZOEN === 'undefined' || SEIZOEN !== 'bedankt') return;
+  if (typeof TERUGBLIK === 'undefined') return;
+  const el = document.getElementById('hero-content');
+  if (!el) return;
+
+  const cijfers = (TERUGBLIK.cijfers || []).map(c => `
+    <div>
+      <div class="hero-cijfer-getal">${esc(c.getal)}</div>
+      <div class="hero-cijfer-label">${esc(c.label)}</div>
+    </div>`).join('');
+
+  el.innerHTML = `
+    ${TERUGBLIK.tag ? `<div class="hero-tag">${esc(TERUGBLIK.tag)}</div>` : ''}
+    <h1 class="hero-title">${TERUGBLIK.titel}</h1>
+    <p class="hero-sub">${esc(TERUGBLIK.tekst)}</p>
+    ${cijfers ? `<div class="hero-cijfers">${cijfers}</div>` : ''}
+    ${TERUGBLIK.knop ? `<a href="${esc(TERUGBLIK.knop.link)}" class="hero-cta">${esc(TERUGBLIK.knop.tekst)}</a>` : ''}
+    ${TERUGBLIK.vervolg ? `<p class="hero-vervolg">${esc(TERUGBLIK.vervolg)}</p>` : ''}
+  `;
+}
+
+// ── AGENDA ──
+function eventCard(e, voorbij, binnenkort) {
+  const p = e.date.split('-');
+  const day = parseInt(p[2]);
+  const month = MONTHS[parseInt(p[1])-1];
+  const year = p[0];
+  let badge = '';
+  if (voorbij) badge = '<span class="badge-past">Voorbij</span>';
+  else if (binnenkort) badge = '<span class="badge-soon">Binnenkort</span>';
+
+  let trekker = '';
+  let help = '';
+  if (!voorbij) {
+    trekker = e.trekker && e.trekker.trim()
+      ? `<div class="event-trekker">Trekker: <strong>${esc(e.trekker)}</strong></div>`
+      : `<div class="event-trekker">Trekker gezocht</div>`;
+    help = `<button class="btn-help" data-help="${esc(e.name)}">Ik help mee</button>`;
+  }
+
+  return `<div class="event-card${voorbij ? ' event-past' : ''}">
+    ${badge}
+    <div class="event-date">${day}</div>
+    <div class="event-month">${month} ${year}</div>
+    <div class="event-name">${esc(e.name)}</div>
+    ${e.note ? `<div class="event-note">${esc(e.note)}</div>` : ''}
+    ${trekker}
+    ${help}
+  </div>`;
+}
+
 function renderEvents() {
-  const today = (function() {
+  const today = todayStr();
+
+  const over7 = (function() {
     const d = new Date();
+    d.setDate(d.getDate() + 7);
     return d.getFullYear() + '-' +
       String(d.getMonth()+1).padStart(2,'0') + '-' +
       String(d.getDate()).padStart(2,'0');
   })();
 
-  const evts = [...ACTIVITEITEN].sort((a,b) => a.date.localeCompare(b.date));
+  const alle = [...ACTIVITEITEN].sort((a,b) => a.date.localeCompare(b.date));
+  const komend = alle.filter(e => e.date >= today);
+  const voorbij = alle.filter(e => e.date < today).reverse();
+
+  // Komt eraan
   const grid = document.getElementById('events-grid');
-  grid.innerHTML = evts.map(e => {
-    const p = e.date.split('-');
-    const day = parseInt(p[2]);
-    const month = MONTHS[parseInt(p[1])-1];
-    const year = p[0];
-    const voorbij = e.date < today;
-    return `<div class="event-card${voorbij ? ' event-past' : ''}">
-      ${voorbij ? '<span class="badge-past">Voorbij</span>' : ''}
-      <div class="event-date">${day}</div>
-      <div class="event-month">${month} ${year}</div>
-      <div class="event-name">${e.name}</div>
-      ${e.note ? `<div class="event-note">${e.note}</div>` : ''}
-    </div>`;
-  }).join('');
+  const subNext = document.getElementById('agenda-sub-next');
+  if (komend.length) {
+    if (subNext) subNext.style.display = 'block';
+    grid.innerHTML = komend.map(e => eventCard(e, false, e.date <= over7)).join('');
+  } else {
+    if (subNext) subNext.style.display = 'none';
+    grid.innerHTML = '<p class="agenda-empty">Er staat momenteel niets gepland. Heb je een idee voor de straat? Laat het hieronder weten.</p>';
+  }
+
+  // Voorbij
+  const blok = document.getElementById('voorbij-blok');
+  const gridPast = document.getElementById('events-grid-past');
+  if (blok && gridPast) {
+    if (voorbij.length) {
+      blok.style.display = 'block';
+      document.getElementById('voorbij-summary').textContent =
+        `Al voorbij (${voorbij.length})`;
+      gridPast.innerHTML = voorbij.map(e => eventCard(e, true, false)).join('');
+    } else {
+      blok.style.display = 'none';
+    }
+  }
+
+  // Vast moment
+  const vm = document.getElementById('vast-moment');
+  if (vm && typeof VAST_MOMENT !== 'undefined' && VAST_MOMENT) {
+    vm.innerHTML = `<strong>Vast moment</strong> · ${esc(VAST_MOMENT)}`;
+    vm.style.display = 'block';
+  }
+
+  // Help-knoppen koppelen
+  document.querySelectorAll('.btn-help').forEach(b => {
+    b.addEventListener('click', () => helpMee(b.getAttribute('data-help')));
+  });
+}
+
+// ── IK HELP MEE ──
+function helpMee(naam) {
+  const ta = document.querySelector('#contact-form textarea[name="bericht"]');
+  if (ta) {
+    ta.value = `Hallo! Ik wil graag meehelpen met "${naam}".`;
+  }
+  const c = document.getElementById('contact');
+  if (c) c.scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => {
+    const n = document.querySelector('#contact-form input[name="naam"]');
+    if (n) n.focus({ preventScroll: true });
+  }, 600);
 }
 
 // ── CONTACT FORM ──
@@ -429,7 +611,11 @@ if (form) {
   });
 }
 
+renderHero();
 renderEvents();
+
+const fj = document.getElementById('footer-jaar');
+if (fj) fj.textContent = new Date().getFullYear();
 
 function toggleMenu() {
   document.getElementById('hamburger').classList.toggle('open');
