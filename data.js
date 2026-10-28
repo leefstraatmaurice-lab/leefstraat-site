@@ -24,11 +24,11 @@ const TOON_AGENDA = true;
 // ═══════════════════════════════════════════
 // ⚠️ PAS DE CIJFERS AAN — dit zijn schattingen
 const TERUGBLIK = {
-  tag: 'Zomer 2026',
-  titel: 'Bedankt,<br><em>buren</em>',
-  tekst: 'Drie maanden lang stonden de stoelen buiten in plaats van de auto\'s, ' +
-         'Dankjewel aan iedereen die mee kwam koken, opruimen, spelen en babbelen — en aan wie gewoon eens bleef staan voor een praatje. ' +
-         'Zonder jullie was het maar een lege straat geweest.',
+  tag: 'Na de zomer',
+  titel: 'We blijven<br><em>buren</em>',
+  tekst: 'De leefstraat is opgeruimd, maar wat we deze zomer samen opbouwden blijft staan. ' +
+         'Nieuwe gezichten, een babbel aan de voordeur, kinderen die elkaar nu bij naam kennen: dat houden we graag levend. ' +
+         'Daarom blijven we ook in het najaar en de winter samenkomen, en werken we alvast toe naar een nieuwe leefstraat in 2027.',
   cijfers: [
     { getal: '12',  label: 'weken straat' },
     { getal: '5',   label: 'activiteiten' },
@@ -36,7 +36,7 @@ const TERUGBLIK = {
   ],
   knop: { tekst: "Bekijk de foto's →", link: 'fotos.html' },
   // Tweede regel onder de knop — laat leeg ('') om te verbergen
-  vervolg: 'En het stopt hier niet: hieronder staat wat er dit najaar op de planning staat.'
+  vervolg: 'Kom gerust eens langs op een van de volgende momenten hieronder. Iedereen uit de straat is welkom.'
 };
 
 
