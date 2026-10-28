@@ -69,14 +69,14 @@ const ACTIVITEITEN = [
   // ── Najaar 2026 – winter 2027 (bevestigd) ──
   {
     date: '2026-11-06',
-    name: 'Herfstdrink 🍂',
+    name: 'Herfstdrink',
     note: 'Vrijdag 18u · De stoelen zijn binnen, maar de buren blijven. Kom een glaasje drinken, warm je handen en praat bij over de zomer en wat er nog komt. Breng gerust iets kleins mee om te delen.',
     trekker: '',
     fb: ''
   },
   {
     date: '2027-01-08',
-    name: 'Nieuwjaarsdrink 🥂',
+    name: 'Nieuwjaarsdrink',
     note: 'Vrijdag 18u · Samen klinken op 2027! Nieuwe buren zijn extra welkom. Heb je ideeën voor het voorjaar of het volgende leefstraatseizoen? Neem ze mee.',
     trekker: '',
     fb: ''
