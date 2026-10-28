@@ -16,7 +16,7 @@ const SEIZOEN = 'bedankt';
 // ═══════════════════════════════════════════
 // false → agenda volledig verborgen (menu-item + sectie)
 // true  → agenda zichtbaar
-const TOON_AGENDA = false;
+const TOON_AGENDA = true;
 
 
 // ═══════════════════════════════════════════
@@ -44,7 +44,9 @@ const TERUGBLIK = {
 //  3. VAST MOMENT — kleine regel boven de agenda
 // ═══════════════════════════════════════════
 // Laat leeg ('') om te verbergen
-const VAST_MOMENT = 'Elke eerste zondag van de maand · 16u · straataperitief — iedereen brengt zijn eigen glas en iets kleins.';
+// Idee, nog niet bevestigd — haal de // weg om terug te tonen:
+// const VAST_MOMENT = 'Elke eerste zondag van de maand · 16u · straataperitief — iedereen brengt zijn eigen glas en iets kleins.';
+const VAST_MOMENT = '';
 
 
 // ═══════════════════════════════════════════
@@ -64,84 +66,102 @@ const ACTIVITEITEN = [
   { date: '2026-08-29', name: 'BBQ',                 note: '',      trekker: '', fb: '' },
   { date: '2026-08-30', name: 'Afbraak Leefstraat',  note: '',      trekker: '', fb: '' },
 
-  // ── Jaarkalender 2026–2027 ──
+  // ── Najaar 2026 – winter 2027 (bevestigd) ──
   {
-    date: '2026-09-20',
-    name: 'Startmoment najaar',
-    note: 'Zondag 16u · straataperitief + kalender voorstellen. We zoeken per activiteit een trekker.',
+    date: '2026-11-06',
+    name: 'Herfstdrink 🍂',
+    note: 'Vrijdag 18u · De stoelen zijn binnen, maar de buren blijven. Kom een glaasje drinken, warm je handen en praat bij over de zomer en wat er nog komt. Breng gerust iets kleins mee om te delen.',
     trekker: '',
     fb: ''
   },
   {
-    date: '2026-10-17',
-    name: 'Klusnamiddag',
-    note: 'Zaterdag 14u · plantenbakken winterklaar, bollen poten, straatmeubilair nakijken. Koffie en taart voorzien.',
-    trekker: '',
-    fb: ''
-  },
-  {
-    date: '2026-10-31',
-    name: 'Halloweentocht',
-    note: 'Zaterdag 18u · wie meedoet zet een pompoen of lichtje buiten. De kinderen gaan de deuren af.',
-    trekker: '',
-    fb: ''
-  },
-  {
-    date: '2026-11-22',
-    name: 'Soep- & stoofpotdag',
-    note: 'Zondag 12u · één grote pot, de rest brengt brood of dessert mee.',
-    trekker: '',
-    fb: ''
-  },
-  {
-    date: '2026-12-20',
-    name: 'Lichtjeswandeling',
-    note: 'Zondag 17u30 · kaarsjes of lampionnen aan elke voordeur, korte wandeling door de straat, warme chocomelk op het einde.',
-    trekker: '',
-    fb: ''
-  },
-  {
-    date: '2027-01-17',
-    name: 'Nieuwjaarsdrink',
-    note: 'Zondag 16u · nieuwe buren verwelkomen en de plannen voor het voorjaar overlopen.',
-    trekker: '',
-    fb: ''
-  },
-  {
-    date: '2027-02-20',
-    name: 'Quiz- & spelavond',
-    note: 'Zaterdag 20u · binnen, bij iemand thuis of in een garage. €2 per persoon voor de drank.',
-    trekker: '',
-    fb: ''
-  },
-  {
-    date: '2027-03-20',
-    name: 'Lenteklus & zaadruil',
-    note: 'Zaterdag 14u · bakken opnieuw vullen, zaden en stekken uitwisselen.',
-    trekker: '',
-    fb: ''
-  },
-  {
-    date: '2027-04-18',
-    name: 'Kinderdag op straat',
-    note: 'Zondag 14u · krijtparcours, kampen bouwen, fietsrace. Straat één namiddag afgesloten.',
-    trekker: '',
-    fb: ''
-  },
-  {
-    date: '2027-05-16',
-    name: 'Stoepverkoop',
-    note: 'Zondag 10u · iedereen zet een tafel voor zijn eigen deur. Geen inschrijving nodig.',
-    trekker: '',
-    fb: ''
-  },
-  {
-    date: '2027-06-05',
-    name: 'Buurt-BBQ & start leefstraat 2027',
-    note: 'Zaterdag 17u · het grote moment, en meteen de aftrap van het nieuwe leefstraatseizoen.',
+    date: '2027-01-08',
+    name: 'Nieuwjaarsdrink 🥂',
+    note: 'Vrijdag 18u · Samen klinken op 2027! Nieuwe buren zijn extra welkom. Heb je ideeën voor het voorjaar of het volgende leefstraatseizoen? Neem ze mee.',
     trekker: '',
     fb: ''
   }
+
+  // ── IDEEËN jaarkalender — NIET online, nog niet bevestigd ──
+  // Haal de // weg bij een activiteit zodra ze vastligt (en zet er een komma voor).
+  // // ── Jaarkalender 2026–2027 ──
+  // {
+  //   date: '2026-09-20',
+  //   name: 'Startmoment najaar',
+  //   note: 'Zondag 16u · straataperitief + kalender voorstellen. We zoeken per activiteit een trekker.',
+  //   trekker: '',
+  //   fb: ''
+  // },
+  // {
+  //   date: '2026-10-17',
+  //   name: 'Klusnamiddag',
+  //   note: 'Zaterdag 14u · plantenbakken winterklaar, bollen poten, straatmeubilair nakijken. Koffie en taart voorzien.',
+  //   trekker: '',
+  //   fb: ''
+  // },
+  // {
+  //   date: '2026-10-31',
+  //   name: 'Halloweentocht',
+  //   note: 'Zaterdag 18u · wie meedoet zet een pompoen of lichtje buiten. De kinderen gaan de deuren af.',
+  //   trekker: '',
+  //   fb: ''
+  // },
+  // {
+  //   date: '2026-11-22',
+  //   name: 'Soep- & stoofpotdag',
+  //   note: 'Zondag 12u · één grote pot, de rest brengt brood of dessert mee.',
+  //   trekker: '',
+  //   fb: ''
+  // },
+  // {
+  //   date: '2026-12-20',
+  //   name: 'Lichtjeswandeling',
+  //   note: 'Zondag 17u30 · kaarsjes of lampionnen aan elke voordeur, korte wandeling door de straat, warme chocomelk op het einde.',
+  //   trekker: '',
+  //   fb: ''
+  // },
+  // {
+  //   date: '2027-01-17',
+  //   name: 'Nieuwjaarsdrink',
+  //   note: 'Zondag 16u · nieuwe buren verwelkomen en de plannen voor het voorjaar overlopen.',
+  //   trekker: '',
+  //   fb: ''
+  // },
+  // {
+  //   date: '2027-02-20',
+  //   name: 'Quiz- & spelavond',
+  //   note: 'Zaterdag 20u · binnen, bij iemand thuis of in een garage. €2 per persoon voor de drank.',
+  //   trekker: '',
+  //   fb: ''
+  // },
+  // {
+  //   date: '2027-03-20',
+  //   name: 'Lenteklus & zaadruil',
+  //   note: 'Zaterdag 14u · bakken opnieuw vullen, zaden en stekken uitwisselen.',
+  //   trekker: '',
+  //   fb: ''
+  // },
+  // {
+  //   date: '2027-04-18',
+  //   name: 'Kinderdag op straat',
+  //   note: 'Zondag 14u · krijtparcours, kampen bouwen, fietsrace. Straat één namiddag afgesloten.',
+  //   trekker: '',
+  //   fb: ''
+  // },
+  // {
+  //   date: '2027-05-16',
+  //   name: 'Stoepverkoop',
+  //   note: 'Zondag 10u · iedereen zet een tafel voor zijn eigen deur. Geen inschrijving nodig.',
+  //   trekker: '',
+  //   fb: ''
+  // },
+  // {
+  //   date: '2027-06-05',
+  //   name: 'Buurt-BBQ & start leefstraat 2027',
+  //   note: 'Zaterdag 17u · het grote moment, en meteen de aftrap van het nieuwe leefstraatseizoen.',
+  //   trekker: '',
+  //   fb: ''
+  // }
 ];
 
 
